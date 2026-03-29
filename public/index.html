@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edozie Ezeanolue — AI Operations Architect</title>
+<meta name="description" content="I build AI-powered operations systems for scaling SaaS companies. 50+ production automations, custom AI agents, and end-to-end operational infrastructure — built solo.">
+<meta property="og:title" content="Edozie Ezeanolue — AI Operations Architect">
+<meta property="og:description" content="I build AI-powered operations systems for scaling SaaS companies. Not individual automations — the connective tissue between your tools, data, and decisions.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='4' fill='%23c9ff57'/><text x='50' y='74' text-anchor='middle' font-size='66' font-family='Georgia,serif' font-weight='400' fill='%230a0a0a'>E</text></svg>">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1017;
+    --surface: #141821;
+    --surface-2: #1a1f2a;
+    --border: #1e2433;
+    --border-light: #282f3e;
+    --text: #e8e4df;
+    --text-muted: #8a8580;
+    --text-dim: #5a5550;
+    --accent: #c9ff57;
+    --accent-dim: #c9ff5720;
+    --accent-mid: #c9ff5740;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+    --nav-bg: rgba(13,16,23,0.88);
+    --nav-mobile-bg: rgba(13,16,23,1);
+    --noise-opacity: 0.03;
+  }
+
+  [data-theme="light"] {
+    --bg: #f4f1ec;
+    --surface: #e9e6e0;
+    --surface-2: #dfdcd6;
+    --border: #d0cdc6;
+    --border-light: #c4c0ba;
+    --text: #1a1816;
+    --text-muted: #5c5750;
+    --text-dim: #8a857e;
+    --accent: #3d6b00;
+    --accent-dim: #3d6b0018;
+    --accent-mid: #3d6b0035;
+    --nav-bg: rgba(244,241,236,0.88);
+    --nav-mobile-bg: rgba(244,241,236,1);
+    --noise-opacity: 0.04;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  ::selection { background: var(--accent); color: var(--bg); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  body.nav-open { overflow: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.25rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--nav-bg);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-name {
+    font-family: var(--mono); font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted);
+    position: relative; cursor: default;
+  }
+  .nav-name .pronounce {
+    font-size: 0.62rem; letter-spacing: 0.03em; text-transform: none;
+    color: var(--text-dim); margin-left: 0.5rem; font-style: italic;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .nav-name:hover .pronounce { opacity: 1; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text-muted); transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); text-decoration: none; }
+  .nav-right { display: flex; align-items: center; gap: 1rem; }
+  .theme-toggle {
+    background: none; border: 1px solid var(--border); cursor: pointer;
+    width: 32px; height: 32px; border-radius: 2px; display: flex;
+    align-items: center; justify-content: center;
+    font-size: 0.85rem; color: var(--text-muted); transition: border-color 0.3s, color 0.3s;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .theme-toggle .icon-sun { display: none; }
+  .theme-toggle .icon-moon { display: block; }
+  [data-theme="light"] .theme-toggle .icon-sun { display: block; }
+  [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+  .nav-toggle {
+    display: none; background: none; border: none; cursor: pointer;
+    flex-direction: column; gap: 5px; padding: 4px;
+  }
+  .nav-toggle span {
+    display: block; width: 20px; height: 1.5px; background: var(--text-muted);
+    transition: all 0.3s;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 2.5rem 6rem; max-width: 1100px; margin: 0 auto;
+  }
+  .hero-available {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--text-muted);
+    padding: 0.3rem 0.85rem 0.3rem 0.65rem;
+    border: 1px solid var(--border-light); border-radius: 100px;
+    margin-bottom: 1.75rem; align-self: flex-start;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.15s;
+  }
+  .hero-available .dot {
+    width: 5px; height: 5px; background: var(--accent);
+    border-radius: 50%; animation: pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--accent-mid); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 5px transparent; }
+  }
+  .hero-label {
+    font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+  .hero h1 {
+    font-family: var(--serif); font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 1.05; font-weight: 400; margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.4s;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 1.15rem; color: var(--text-muted); max-width: 640px;
+    line-height: 1.7; margin-bottom: 3rem;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.6s;
+  }
+  .hero-meta {
+    display: flex; gap: 2.5rem; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.8s;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 0.3rem; }
+  .hero-meta-label {
+    font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-dim);
+  }
+  .hero-meta-value { font-family: var(--mono); font-size: 0.85rem; color: var(--text); }
+
+  /* ── SYSTEMS STRIP ── */
+  .systems-strip {
+    padding: 2.5rem 0; overflow: hidden;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .systems-scroll {
+    display: flex; gap: 1rem;
+    animation: scrollLeft 35s linear infinite;
+  }
+  .system-badge {
+    flex-shrink: 0; font-family: var(--mono); font-size: 0.65rem;
+    letter-spacing: 0.04em; color: var(--text-dim);
+    padding: 0.4rem 1rem; border: 1px solid var(--border);
+    border-radius: 100px; white-space: nowrap; background: var(--surface);
+  }
+  @keyframes scrollLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400; margin-bottom: 1.5rem; line-height: 1.15;
+  }
+  .section-desc {
+    color: var(--text-muted); font-size: 1.05rem; max-width: 640px;
+    line-height: 1.7; margin-bottom: 3.5rem;
+  }
+
+  .divider { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
+  .divider hr { border: none; border-top: 1px solid var(--border); }
+
+  /* ── WHAT I BUILD ── */
+  .capabilities {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 2px;
+  }
+  .capability { background: var(--surface); padding: 2.25rem; transition: background 0.4s; }
+  .capability:hover { background: var(--surface-2); }
+  .capability-icon { font-size: 1.4rem; margin-bottom: 1rem; }
+  .capability h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.75rem; }
+  .capability p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; }
+
+  /* ── CASE STUDIES ── */
+  .case-studies { display: flex; flex-direction: column; gap: 1.5rem; }
+  .case-study {
+    border: 1px solid var(--border); border-radius: 2px;
+    overflow: hidden; transition: border-color 0.3s;
+  }
+  .case-study:hover, .case-study.open { border-color: var(--border-light); }
+  .case-study-header {
+    padding: 2rem 2.25rem; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem;
+    background: var(--surface); transition: background 0.3s;
+    border: none; width: 100%; text-align: left; font-family: inherit; color: inherit;
+  }
+  .case-study-header:hover { background: var(--surface-2); }
+  .case-study-number {
+    font-family: var(--mono); font-size: 0.7rem; color: var(--accent);
+    letter-spacing: 0.06em; margin-bottom: 0.5rem;
+  }
+  .case-study-title {
+    font-family: var(--serif); font-size: 1.35rem; font-weight: 400;
+    line-height: 1.3; margin-bottom: 0.65rem;
+  }
+  .case-study-tagline { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+  .case-study-toggle {
+    font-family: var(--mono); font-size: 1.2rem; color: var(--text-dim);
+    flex-shrink: 0; width: 2rem; height: 2rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.35s ease, color 0.3s;
+  }
+  .case-study.open .case-study-toggle { transform: rotate(45deg); color: var(--accent); }
+  .case-study-body {
+    display: grid; grid-template-rows: 0fr;
+    transition: grid-template-rows 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .case-study.open .case-study-body { grid-template-rows: 1fr; }
+  .case-study-body-inner { overflow: hidden; }
+  .case-study-content { padding: 0 2.25rem 2.25rem; border-top: 1px solid var(--border); }
+  .cs-section { padding: 1.75rem 0; border-bottom: 1px solid var(--border); }
+  .cs-section:last-child { border-bottom: none; }
+  .cs-section-label {
+    font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.75rem;
+  }
+  .cs-section p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; }
+  .cs-highlights { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .cs-tag {
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.04em;
+    padding: 0.35rem 0.75rem; border: 1px solid var(--border-light);
+    border-radius: 2px; color: var(--text-muted); background: var(--surface-2);
+  }
+  .cs-stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1px; background: var(--border); border: 1px solid var(--border);
+    border-radius: 2px; margin-top: 1rem;
+  }
+  .cs-stat { background: var(--surface); padding: 1.1rem 1.25rem; }
+  .cs-stat-value { font-family: var(--serif); font-size: 1.5rem; color: var(--accent); margin-bottom: 0.2rem; }
+  .cs-stat-label { font-size: 0.75rem; color: var(--text-dim); }
+
+  /* ── APPROACH ── */
+  .approach-list { display: flex; flex-direction: column; }
+  .approach-item { border-bottom: 1px solid var(--border); }
+  .approach-item:first-child { border-top: 1px solid var(--border); }
+  .approach-header {
+    display: flex; align-items: center; gap: 1.5rem;
+    padding: 1.5rem 0; cursor: pointer; width: 100%;
+    background: none; border: none; text-align: left;
+    font-family: inherit; color: inherit;
+  }
+  .approach-header:hover .approach-num { color: var(--accent); }
+  .approach-num {
+    font-family: var(--mono); font-size: 0.7rem; color: var(--text-dim);
+    letter-spacing: 0.06em; min-width: 2rem; transition: color 0.3s;
+  }
+  .approach-item.open .approach-num { color: var(--accent); }
+  .approach-header h4 {
+    font-family: var(--sans); font-size: 1rem; font-weight: 500;
+    flex: 1; line-height: 1.4;
+  }
+  .approach-toggle {
+    font-family: var(--mono); font-size: 1.1rem; color: var(--text-dim);
+    transition: transform 0.35s ease, color 0.3s; flex-shrink: 0;
+  }
+  .approach-item.open .approach-toggle { transform: rotate(45deg); color: var(--accent); }
+  .approach-body {
+    display: grid; grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .approach-item.open .approach-body { grid-template-rows: 1fr; }
+  .approach-body-inner { overflow: hidden; }
+  .approach-body p {
+    font-size: 0.92rem; color: var(--text-muted); line-height: 1.7;
+    padding: 0 0 1.5rem 3.5rem;
+  }
+
+  /* ── ABOUT ── */
+  .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .about-text { font-size: 1rem; color: var(--text-muted); line-height: 1.75; }
+  .about-text p + p { margin-top: 1.25rem; }
+  .about-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .about-list li {
+    font-size: 0.88rem; color: var(--text-muted); padding-left: 1.25rem; position: relative;
+  }
+  .about-list li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--accent); font-family: var(--mono); font-size: 0.8rem;
+  }
+
+  /* ── CTA ── */
+  .cta-section { text-align: center; padding: 8rem 2.5rem; }
+  .cta-title {
+    font-family: var(--serif); font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-weight: 400; margin-bottom: 1.25rem; line-height: 1.15;
+  }
+  .cta-sub {
+    color: var(--text-muted); font-size: 1.05rem; margin-bottom: 2.5rem;
+    max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.65;
+  }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 1rem 2.25rem;
+    background: var(--accent); color: var(--bg); border: none; border-radius: 2px;
+    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none;
+  }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-dim); text-decoration: none; }
+  .cta-btn-secondary {
+    background: transparent; border: 1px solid var(--border-light);
+    color: var(--text-muted); margin-left: 1rem;
+  }
+  .cta-btn-secondary:hover { border-color: var(--text-dim); color: var(--text); box-shadow: none; transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2.5rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1100px; margin: 0 auto;
+  }
+  footer span { font-family: var(--mono); font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.04em; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .reveal { opacity: 1; transform: none; }
+    .nav-name .pronounce { opacity: 0.7; font-size: 0.55rem; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-right { gap: 0.75rem; z-index: 201; position: relative; }
+    .theme-toggle { width: 40px; height: 40px; font-size: 1rem; }
+    .nav-links {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+      background: var(--bg);
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 2.5rem; z-index: 200;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links.open ~ .nav-right { z-index: 201; }
+    .nav-links a { font-size: 1.1rem; }
+    .nav-toggle { display: flex; z-index: 201; }
+    .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+    .nav-toggle.active span:nth-child(2) { opacity: 0; }
+    .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+    .capabilities { grid-template-columns: 1fr; }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    .hero-sub { font-size: 1.05rem; }
+    section { padding: 4rem 1.5rem; }
+    .divider { padding: 0 1.5rem; }
+    .about-content { grid-template-columns: 1fr; gap: 2rem; }
+    .case-study-header { padding: 1.5rem; flex-direction: row; }
+    .case-study-title { font-size: 1.15rem; }
+    .case-study-tagline { font-size: 0.82rem; }
+    .case-study-content { padding: 0 1.5rem 1.5rem; }
+    .cs-section p { font-size: 0.88rem; }
+    .hero-meta { gap: 1.5rem; }
+    .cta-section { padding: 5rem 1.5rem; }
+    .cta-buttons { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+    .cta-btn { width: 100%; max-width: 280px; justify-content: center; }
+    .cta-btn-secondary { margin-left: 0; margin-top: 0; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.75rem; }
+    .section-desc { font-size: 0.98rem; }
+  }
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 2.5rem; }
+    .cs-stats { grid-template-columns: repeat(2, 1fr); }
+    .hero-meta { flex-direction: column; gap: 1rem; }
+    .case-study-header { gap: 1rem; }
+    .case-study-toggle { width: 1.5rem; height: 1.5rem; font-size: 1rem; }
+    .cs-tag { font-size: 0.62rem; padding: 0.3rem 0.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-name">Edozie Ezeanolue<span class="pronounce">(uh-DOE-zee · ez-ah-NOH-loo-ay)</span></span>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#cases">Case Studies</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode" onclick="toggleTheme()">
+      <span class="icon-moon">&#9789;</span>
+      <span class="icon-sun">&#9788;</span>
+    </button>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-available"><span class="dot"></span>Available for consulting engagements</div>
+  <div class="hero-label">AI Operations Architect</div>
+  <h1>I build the systems<br>that make <em>companies run</em></h1>
+  <p class="hero-sub">
+    AI agents, automation architectures, and operational infrastructure for SaaS companies scaling past manual processes. Previously built the entire ops backbone for a Sequoia-backed healthcare startup as a solo builder.
+  </p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Previously</span>
+      <span class="hero-meta-value">Head of Business & AI Ops @ Freed</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Backed by</span>
+      <span class="hero-meta-value">$30M Series A (Sequoia)</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Automations</span>
+      <span class="hero-meta-value">50+ shipped</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Solo build</span>
+      <span class="hero-meta-value">~9 months</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Background</span>
+      <span class="hero-meta-value">MD, UNLV School of Medicine</span>
+    </div>
+  </div>
+</header>
+
+<!-- SYSTEMS STRIP -->
+<div class="systems-strip">
+  <div class="systems-scroll">
+    <span class="system-badge">Claude Agent SDK</span>
+    <span class="system-badge">Model Context Protocol</span>
+    <span class="system-badge">Make.com</span>
+    <span class="system-badge">n8n</span>
+    <span class="system-badge">HubSpot</span>
+    <span class="system-badge">Stripe</span>
+    <span class="system-badge">Intercom</span>
+    <span class="system-badge">Slack</span>
+    <span class="system-badge">BigQuery</span>
+    <span class="system-badge">Notion</span>
+    <span class="system-badge">Gong</span>
+    <span class="system-badge">ClickUp</span>
+    <span class="system-badge">GrowthBook</span>
+    <span class="system-badge">Railway</span>
+    <span class="system-badge">Firecrawl</span>
+    <span class="system-badge">OpenAI</span>
+    <!-- duplicate set for seamless loop -->
+    <span class="system-badge">Claude Agent SDK</span>
+    <span class="system-badge">Model Context Protocol</span>
+    <span class="system-badge">Make.com</span>
+    <span class="system-badge">n8n</span>
+    <span class="system-badge">HubSpot</span>
+    <span class="system-badge">Stripe</span>
+    <span class="system-badge">Intercom</span>
+    <span class="system-badge">Slack</span>
+    <span class="system-badge">BigQuery</span>
+    <span class="system-badge">Notion</span>
+    <span class="system-badge">Gong</span>
+    <span class="system-badge">ClickUp</span>
+    <span class="system-badge">GrowthBook</span>
+    <span class="system-badge">Railway</span>
+    <span class="system-badge">Firecrawl</span>
+    <span class="system-badge">OpenAI</span>
+  </div>
+</div>
+
+<!-- WHAT I BUILD -->
+<section id="work">
+  <div class="section-label reveal">What I Build</div>
+  <h2 class="section-title reveal">Operations infrastructure<br>that runs itself</h2>
+  <p class="section-desc reveal">Most companies automate tasks. I automate the connections between tasks — the handoffs, the data propagation, the lifecycle events that fall through the cracks when systems don't talk to each other.</p>
+  <div class="capabilities reveal">
+    <div class="capability">
+      <div class="capability-icon">⟁</div>
+      <h3>Event-Chain Architectures</h3>
+      <p>Self-sustaining automation cascades where a single upstream event — a payment, a cancellation, a stage change — triggers every downstream action automatically. Each phase decoupled, each phase independently re-triggerable.</p>
+    </div>
+    <div class="capability">
+      <div class="capability-icon">◎</div>
+      <h3>Autonomous AI Agents</h3>
+      <p>Production-grade agents connected to your business systems via MCP, backed by persistent knowledge brains that learn from your team — deployed in Slack, not a separate tool. Not chatbots — operational agents.</p>
+    </div>
+    <div class="capability">
+      <div class="capability-icon">⬡</div>
+      <h3>Feedback Intelligence</h3>
+      <p>Multi-source feedback pipelines that capture signal from support, sales calls, meetings, and team observations — classified by AI, enriched with account data, queryable from one surface.</p>
+    </div>
+    <div class="capability">
+      <div class="capability-icon">◈</div>
+      <h3>AI-Augmented Support Ops</h3>
+      <p>Automatic triage, AI ghost-writing for agents, structured escalation tickets, and social proof capture — invisible to customers, transformative for the team.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- CASE STUDIES -->
+<section id="cases">
+  <div class="section-label reveal">Selected Work</div>
+  <h2 class="section-title reveal">Case Studies</h2>
+  <p class="section-desc reveal">All work completed as a solo builder at a Sequoia-backed vertical SaaS company (~100 employees, thousands of customers) over approximately 9 months.</p>
+
+  <div class="case-studies">
+
+    <!-- CS 1 -->
+    <div class="case-study reveal">
+      <button class="case-study-header" onclick="toggleCS(this)">
+        <div>
+          <div class="case-study-number">01</div>
+          <div class="case-study-title">End-to-End Sales Lifecycle Automation</div>
+          <div class="case-study-tagline">10-phase event chain from payment detection through churn recovery — zero manual data entry.</div>
+        </div>
+        <div class="case-study-toggle">+</div>
+      </button>
+      <div class="case-study-body"><div class="case-study-body-inner">
+        <div class="case-study-content">
+          <div class="cs-section">
+            <div class="cs-section-label">The Problem</div>
+            <p>The sales team had no automated way to know when a customer paid. Account manager assignment took 15–30 minutes of manual research per deal. Post-close handoff emails were frequently forgotten. Subscription changes in billing were invisible to the CRM. Churn was reactive — cancellations were noticed days later, if at all.</p>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">What I Built</div>
+            <p>A system where a single payment event triggers an automated cascade through the entire post-sale lifecycle: payment detection → Slack notifications → AI-powered company enrichment → account manager round-robin → post-close email sequences (governed by a state machine to prevent duplicate sends) → engagement monitoring → automatic upsell/downsell deal creation from billing events → deal outcome alerts → churn detection with AI-drafted win-back emails → nightly data reconciliation that self-heals integrity gaps.</p>
+            <p style="margin-top: 0.75rem;">Each phase is decoupled — triggered by CRM property changes, not direct calls — so any phase can be re-triggered independently by ops, by a Slack emoji, or by the nightly reconciliation.</p>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">Architecture Highlights</div>
+            <div class="cs-highlights">
+              <span class="cs-tag">Event Chain Design</span>
+              <span class="cs-tag">Decoupling Principle</span>
+              <span class="cs-tag">State Machine (Email Sequences)</span>
+              <span class="cs-tag">AI Company Enrichment</span>
+              <span class="cs-tag">Delta Builder (Subscription Changes)</span>
+              <span class="cs-tag">Nightly Self-Healing Pipeline</span>
+              <span class="cs-tag">Dual-Path Resolution</span>
+            </div>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">Results</div>
+            <div class="cs-stats">
+              <div class="cs-stat"><div class="cs-stat-value">10</div><div class="cs-stat-label">Automated phases</div></div>
+              <div class="cs-stat"><div class="cs-stat-value">8+</div><div class="cs-stat-label">Orchestration scenarios</div></div>
+              <div class="cs-stat"><div class="cs-stat-value">&lt;60s</div><div class="cs-stat-label">Account assignment (was 15–30 min)</div></div>
+              <div class="cs-stat"><div class="cs-stat-value">0</div><div class="cs-stat-label">Manual data entry</div></div>
+            </div>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">Stack</div>
+            <div class="cs-highlights">
+              <span class="cs-tag">Make</span><span class="cs-tag">n8n</span><span class="cs-tag">HubSpot Workflows</span><span class="cs-tag">Stripe</span><span class="cs-tag">Slack</span><span class="cs-tag">BigQuery</span><span class="cs-tag">OpenAI</span><span class="cs-tag">Google Sheets</span>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- CS 2 -->
+    <div class="case-study reveal">
+      <button class="case-study-header" onclick="toggleCS(this)">
+        <div>
+          <div class="case-study-number">02</div>
+          <div class="case-study-title">Production AI Operations Agent</div>
+          <div class="case-study-tagline">From proof-of-concept chatbot to a production autonomous agent connected to 13 business systems — evolved across 4 major architecture versions.</div>
+        </div>
+        <div class="case-study-toggle">+</div>
+      </button>
+      <div class="case-study-body"><div class="case-study-body-inner">
+        <div class="case-study-content">
+          <div class="cs-section">
+            <div class="cs-section-label">The Problem</div>
+            <p>Teams operated across 12+ business systems. Most cross-system questions required opening 3–4 tools and manually synthesizing the answer. No one person understood the full stack, and onboarding new team members meant weeks of learning where information lived.</p>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">What I Built</div>
+            <p>An AI agent embedded in Slack that serves as the company's single front door for internal operations. The agent connects to 13 systems via MCP — using first-party MCPs where available, and custom-built MCP servers for any software with an API that lacked one — spanning CRM, support, billing, project management, knowledge base, analytics warehouse, sales intelligence, cold outreach, calendar, experimentation platform, and more. It runs on the Anthropic Claude Agent SDK and is backed by a persistent knowledge brain that the team actively teaches.</p>
+            <p style="margin-top: 0.75rem;">Evolved through 4 architecture versions — from a no-code prototype answering ~30% of questions, through progressive MCP expansion, to a full SDK rebuild that handles ~90%+ of internal questions with sub-agent delegation, BigQuery analytics across 3 GCP projects, and source code access for data lineage tracing.</p>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">Architecture Highlights</div>
+            <div class="cs-highlights">
+              <span class="cs-tag">Orchestrator Pattern</span><span class="cs-tag">13 MCP Integrations (3 Hosting Tiers)</span><span class="cs-tag">Persistent Knowledge Brain</span><span class="cs-tag">.learn Command (Teachable)</span><span class="cs-tag">Sub-Agent Delegation</span><span class="cs-tag">Preflight System</span><span class="cs-tag">v3 Rollback Procedure</span><span class="cs-tag">OAuth Proxy Workaround</span>
+            </div>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">Results</div>
+            <div class="cs-stats">
+              <div class="cs-stat"><div class="cs-stat-value">13</div><div class="cs-stat-label">Connected systems</div></div>
+              <div class="cs-stat"><div class="cs-stat-value">100+</div><div class="cs-stat-label">Daily users</div></div>
+              <div class="cs-stat"><div class="cs-stat-value">90%+</div><div class="cs-stat-label">Questions answered</div></div>
+              <div class="cs-stat"><div class="cs-stat-value">4</div><div class="cs-stat-label">Architecture versions</div></div>
+            </div>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">Stack</div>
+            <div class="cs-highlights">
+              <span class="cs-tag">Anthropic Claude Agent SDK</span><span class="cs-tag">Claude Opus 4</span><span class="cs-tag">MCP</span><span class="cs-tag">Railway</span><span class="cs-tag">Notion</span><span class="cs-tag">BigQuery</span><span class="cs-tag">Make</span><span class="cs-tag">n8n</span><span class="cs-tag">HubSpot</span><span class="cs-tag">Intercom</span><span class="cs-tag">Stripe</span><span class="cs-tag">ClickUp</span><span class="cs-tag">Gong</span><span class="cs-tag">SmartLead</span><span class="cs-tag">Slack</span>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- CS 3 -->
+    <div class="case-study reveal">
+      <button class="case-study-header" onclick="toggleCS(this)">
+        <div>
+          <div class="case-study-number">03</div>
+          <div class="case-study-title">Unified Feedback Intelligence Platform</div>
+          <div class="case-study-tagline">5 disconnected feedback sources → 1 AI-classified, account-enriched, self-service database with zero manual logging.</div>
+        </div>
+        <div class="case-study-toggle">+</div>
+      </button>
+      <div class="case-study-body"><div class="case-study-body-inner">
+        <div class="case-study-content">
+          <div class="cs-section">
+            <div class="cs-section-label">The Problem</div>
+            <p>Product feedback was scattered across support conversations, sales call recordings, meeting notes, domain expert insights, and ad-hoc team observations. PMs spent 3–5 hours per week manually hunting for signal. No structured data existed for trend analysis. Feedback categories were developer-controlled — PMs couldn't start or stop tracking a theme without an automation edit.</p>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">What I Built</div>
+            <p>A five-source ingestion system where sales calls and meeting notes are auto-ingested (zero touch), support conversations are webhook-driven, domain expert channels self-trigger via an auto-react pattern, and any team member can tag feedback with a single emoji click. All sources feed through a shared AI classification layer that reads from a self-service category registry — PMs add or retire tracked categories from Slack in 30 seconds. Every entry is enriched with account data (specialty, subscription status, license count) resolved from CRM and support systems.</p>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">Architecture Highlights</div>
+            <div class="cs-highlights">
+              <span class="cs-tag">Separate Pipelines, Shared Brain</span><span class="cs-tag">Self-Service Category Registry</span><span class="cs-tag">Multi-Category Classification</span><span class="cs-tag">Account Enrichment Agent</span><span class="cs-tag">Verbatim vs. Summarized (Source-Aware)</span><span class="cs-tag">Auto-Ingest Pattern</span><span class="cs-tag">Graceful Degradation</span>
+            </div>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">Results</div>
+            <div class="cs-stats">
+              <div class="cs-stat"><div class="cs-stat-value">5</div><div class="cs-stat-label">Unified sources</div></div>
+              <div class="cs-stat"><div class="cs-stat-value">0</div><div class="cs-stat-label">Manual logging</div></div>
+              <div class="cs-stat"><div class="cs-stat-value">30s</div><div class="cs-stat-label">To add a new category</div></div>
+              <div class="cs-stat"><div class="cs-stat-value">3–5 hrs</div><div class="cs-stat-label">Saved per PM per week</div></div>
+            </div>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">Stack</div>
+            <div class="cs-highlights">
+              <span class="cs-tag">Make</span><span class="cs-tag">OpenAI</span><span class="cs-tag">Notion</span><span class="cs-tag">Slack</span><span class="cs-tag">Intercom</span><span class="cs-tag">HubSpot</span><span class="cs-tag">Gong</span><span class="cs-tag">Fireflies</span>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- CS 4 -->
+    <div class="case-study reveal">
+      <button class="case-study-header" onclick="toggleCS(this)">
+        <div>
+          <div class="case-study-number">04</div>
+          <div class="case-study-title">AI-Augmented Support Operations</div>
+          <div class="case-study-tagline">4 interlocking systems — auto-triage, AI ghost-writer, smart ticketing, and social proof capture — across every inbound conversation.</div>
+        </div>
+        <div class="case-study-toggle">+</div>
+      </button>
+      <div class="case-study-body"><div class="case-study-body-inner">
+        <div class="case-study-content">
+          <div class="cs-section">
+            <div class="cs-section-label">The Problem</div>
+            <p>Support agents spent 2–5 minutes per conversation gathering context before they could help. Every conversation entered an undifferentiated queue — regression reports sat alongside how-to questions. Engineering escalations were manually created, inconsistently formatted, and missing context. Customer praise disappeared after being read once.</p>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">What I Built</div>
+            <p>Four systems that run across every conversation: (1) Auto-enrichment + two-layer AI triage (fast gating classifier → detailed feedback classifier), with rule-based tagging for enterprise accounts and clinical safety signals. (2) An AI ghost-writer that drafts replies signed with the agent's name — the customer never knows AI was involved. (3) Smart ticketing that creates AI-structured Notion tickets + Slack threads + Intercom confirmations with three-way cross-linking. (4) Automatic social proof capture that routes customer praise to a dedicated channel.</p>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">Architecture Highlights</div>
+            <div class="cs-highlights">
+              <span class="cs-tag">Two-Layer Classification</span><span class="cs-tag">AI Ghost-Writer Pattern</span><span class="cs-tag">Three-Way Cross-Linking</span><span class="cs-tag">Shared Category Registry</span><span class="cs-tag">Clinical Safety Alerts</span><span class="cs-tag">Round-Robin Assignment</span><span class="cs-tag">Graceful Degradation</span>
+            </div>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">Results</div>
+            <div class="cs-stats">
+              <div class="cs-stat"><div class="cs-stat-value">4</div><div class="cs-stat-label">Interlocking systems</div></div>
+              <div class="cs-stat"><div class="cs-stat-value">&lt;30s</div><div class="cs-stat-label">Escalation ticket creation</div></div>
+              <div class="cs-stat"><div class="cs-stat-value">2–5 min</div><div class="cs-stat-label">Saved per conversation</div></div>
+              <div class="cs-stat"><div class="cs-stat-value">0</div><div class="cs-stat-label">Manual triage required</div></div>
+            </div>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">Stack</div>
+            <div class="cs-highlights">
+              <span class="cs-tag">Make</span><span class="cs-tag">Intercom</span><span class="cs-tag">OpenAI</span><span class="cs-tag">Notion</span><span class="cs-tag">Slack</span><span class="cs-tag">HubSpot</span>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- CS 5 -->
+    <div class="case-study reveal">
+      <button class="case-study-header" onclick="toggleCS(this)">
+        <div>
+          <div class="case-study-number">05</div>
+          <div class="case-study-title">Teachable Knowledge Architecture</div>
+          <div class="case-study-tagline">A persistent, domain-organized knowledge brain that any team member can teach from Slack — giving an AI agent institutional memory.</div>
+        </div>
+        <div class="case-study-toggle">+</div>
+      </button>
+      <div class="case-study-body"><div class="case-study-body-inner">
+        <div class="case-study-content">
+          <div class="cs-section">
+            <div class="cs-section-label">The Problem</div>
+            <p>The AI agent connected to 13 systems could look up any data — but it couldn't know things. It used the wrong metric definitions, followed incorrect procedures, and fell into known traps. Corrections were acknowledged and then forgotten by the next conversation. Every interaction was a first interaction.</p>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">What I Built</div>
+            <p>A structured Notion directory — the "Brain" — organized by 6 business domains, each containing three knowledge types: Definitions (what terms mean), Workflows (step-by-step procedures), and Rules (always/never/prefer guardrails). The agent searches the Brain before answering any domain question. Any team member teaches new knowledge via a .learn command from Slack — the agent classifies, formats, and files it automatically. Every entry has source attribution, creating an institutional changelog. A Common Questions layer routes frequent analytics questions to existing dashboards instead of running new queries.</p>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">Architecture Highlights</div>
+            <div class="cs-highlights">
+              <span class="cs-tag">Domain-Organized (6 Domains)</span><span class="cs-tag">3 Knowledge Types</span><span class="cs-tag">.learn Flywheel</span><span class="cs-tag">Write Protection</span><span class="cs-tag">Source Attribution</span><span class="cs-tag">Dashboard Fast-Paths</span><span class="cs-tag">Semantic Search at Query Time</span>
+            </div>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">Key Insight</div>
+            <p>An agent with access to every system but no institutional knowledge makes the same mistakes a new hire would. The Brain separates <em>access</em> from <em>understanding</em>. It was the single highest-leverage addition across four major agent versions — not because it improved reasoning, but because it improved judgment.</p>
+          </div>
+          <div class="cs-section">
+            <div class="cs-section-label">Stack</div>
+            <div class="cs-highlights">
+              <span class="cs-tag">Notion (Brain)</span><span class="cs-tag">Claude Agent SDK</span><span class="cs-tag">MCP (Semantic Search)</span><span class="cs-tag">Slack</span>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- APPROACH -->
+<section id="approach">
+  <div class="section-label reveal">How I Work</div>
+  <h2 class="section-title reveal">What makes this different</h2>
+  <p class="section-desc reveal">I don't automate tasks in isolation. I design interconnected systems where every component feeds the next — and the whole thing gets smarter without code changes.</p>
+
+  <div class="approach-list reveal">
+    <div class="approach-item">
+      <button class="approach-header" onclick="toggleApproach(this)">
+        <span class="approach-num">01</span>
+        <h4>Systems thinking, not task automation</h4>
+        <span class="approach-toggle">+</span>
+      </button>
+      <div class="approach-body"><div class="approach-body-inner">
+        <p>Every system is part of a larger whole. The sales pipeline feeds engagement, which feeds churn prevention, which feeds analytics. Nothing exists in isolation. One build solves five downstream problems.</p>
+      </div></div>
+    </div>
+    <div class="approach-item">
+      <button class="approach-header" onclick="toggleApproach(this)">
+        <span class="approach-num">02</span>
+        <h4>AI as a first-class operator</h4>
+        <span class="approach-toggle">+</span>
+      </button>
+      <div class="approach-body"><div class="approach-body-inner">
+        <p>The AI agent isn't a demo. It's the primary interface for daily operations — with institutional memory, sub-agents, analytics access, and guardrails. I build agents that your team actually trusts and uses.</p>
+      </div></div>
+    </div>
+    <div class="approach-item">
+      <button class="approach-header" onclick="toggleApproach(this)">
+        <span class="approach-num">03</span>
+        <h4>Self-improving, self-healing</h4>
+        <span class="approach-toggle">+</span>
+      </button>
+      <div class="approach-body"><div class="approach-body-inner">
+        <p>Agents learn via teach commands. Pipelines run nightly reconciliation. Feedback systems have dynamic categories. These systems get better over time without developer intervention.</p>
+      </div></div>
+    </div>
+    <div class="approach-item">
+      <button class="approach-header" onclick="toggleApproach(this)">
+        <span class="approach-num">04</span>
+        <h4>Stack-agnostic by design</h4>
+        <span class="approach-toggle">+</span>
+      </button>
+      <div class="approach-body"><div class="approach-body-inner">
+        <p>I work with your existing tech stack — or recommend a better one. If a tool has an API, I can integrate it. If it doesn't have an MCP server, I'll build one. I learn new platforms fast and meet teams where they are, not where I wish they were.</p>
+      </div></div>
+    </div>
+    <div class="approach-item">
+      <button class="approach-header" onclick="toggleApproach(this)">
+        <span class="approach-num">05</span>
+        <h4>Human-in-the-loop where it matters</h4>
+        <span class="approach-toggle">+</span>
+      </button>
+      <div class="approach-body"><div class="approach-body-inner">
+        <p>AI drafts churn emails but humans review before sending. The agent confirms before destructive operations. Automation handles routine; humans handle judgment calls. The right balance, not full autopilot.</p>
+      </div></div>
+    </div>
+    <div class="approach-item">
+      <button class="approach-header" onclick="toggleApproach(this)">
+        <span class="approach-num">06</span>
+        <h4>Enterprise-grade guardrails</h4>
+        <span class="approach-toggle">+</span>
+      </button>
+      <div class="approach-body"><div class="approach-body-inner">
+        <p>Built for sensitive environments from day one. PII/PHI detection and redaction, compliance-aware data handling, and support data anonymization. My clinical background means I understand what it takes to build AI systems that operate where the stakes are real — healthcare, finance, legal, and beyond.</p>
+      </div></div>
+    </div>
+    <div class="approach-item">
+      <button class="approach-header" onclick="toggleApproach(this)">
+        <span class="approach-num">07</span>
+        <h4>Solo builder, full ownership</h4>
+        <span class="approach-toggle">+</span>
+      </button>
+      <div class="approach-body"><div class="approach-body-inner">
+        <p>I've built and maintained 50+ production automations as a one-person team. I design the architecture, build the system, deploy it, monitor it, and iterate on it. No handoffs, no gaps.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label reveal">About</div>
+  <h2 class="section-title reveal">The backstory</h2>
+  <div class="about-content reveal">
+    <div class="about-text">
+      <p>I was the <strong>first hire at Freed</strong> — a healthcare AI company that went on to raise a $30M Series A led by Sequoia Capital. Over 2.5 years, I built the entire operational infrastructure as a solo builder: 50+ production automations, a custom AI agent used daily by 100+ employees, and four interlocking systems across sales, support, feedback, and knowledge management — scaling the company to serve 20,000+ clinicians.</p>
+      <p>My trajectory was unconventional. I started as Head of Customer Operations, built the support function from scratch, then expanded into building the AI and automation systems that became the company's operational nervous system. I finished as <strong>Head of Business and AI Operations</strong>, owning infrastructure across CRM, finance, sales, product, people ops, and support.</p>
+      <p>My clinical background (MD, UNLV School of Medicine) isn't a footnote — it's a lens. It taught me how to build for high-stakes environments — where workflows are complex, compliance is non-negotiable, and the people using your systems need to trust them completely.</p>
+      <p>I'm now taking this playbook to other companies. <strong>If you're scaling past manual processes and your systems don't talk to each other, that's where I work.</strong></p>
+    </div>
+    <div>
+      <div class="cs-section-label" style="margin-bottom: 1rem;">Experience</div>
+      <ul class="about-list">
+        <li>Head of Business & AI Ops, Freed</li>
+        <li>Head of Customer Ops, Freed</li>
+        <li>First hire, employee #1</li>
+      </ul>
+      <div class="cs-section-label" style="margin-bottom: 1rem; margin-top: 2rem;">Education</div>
+      <ul class="about-list">
+        <li>MD, UNLV SOM</li>
+        <li>University of Notre Dame '22</li>
+        <li>Founded NXSTEP at ND</li>
+      </ul>
+      <div class="cs-section-label" style="margin-bottom: 1rem; margin-top: 2rem;">Platforms I build on</div>
+      <ul class="about-list">
+        <li>Claude Agent SDK + MCP</li>
+        <li>Make.com, n8n, HubSpot Workflows</li>
+        <li>OpenAI, Claude, GPT</li>
+        <li>Slack, Notion, Intercom, Stripe</li>
+        <li>HubSpot, Gong, ClickUp</li>
+        <li>BigQuery, Dataform, dbt</li>
+        <li>Railway, Firecrawl</li>
+      </ul>
+      <div class="cs-section-label" style="margin-bottom: 1rem; margin-top: 2rem;">Location</div>
+      <ul class="about-list">
+        <li>Las Vegas, NV</li>
+        <li>Remote-first</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="section-label reveal">Get in touch</div>
+  <h2 class="cta-title reveal">Let's build your<br>operations backbone</h2>
+  <p class="cta-sub reveal">I take on a limited number of engagements to maintain depth. If you're a scaling SaaS company drowning in manual ops, let's talk.</p>
+  <div class="reveal cta-buttons">
+    <a href="mailto:edozie18@gmail.com" class="cta-btn">Get in Touch →</a>
+    <a href="https://www.linkedin.com/in/edozie-ezeanolue-b71798180/" target="_blank" class="cta-btn cta-btn-secondary">LinkedIn</a>
+  </div>
+</section>
+
+<footer>
+  <span>&copy; 2026 Edozie Ezeanolue</span>
+  <span>Built in Las Vegas</span>
+</footer>
+
+<script>
+// Theme toggle
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch(e) {}
+}
+// Restore saved theme preference (defaults to dark)
+(function() {
+  try {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  } catch(e) {}
+})();
+
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('navToggle').classList.toggle('active');
+  document.body.classList.toggle('nav-open');
+}
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('navToggle').classList.remove('active');
+    document.body.classList.remove('nav-open');
+  });
+});
+
+function toggleCS(btn) {
+  const card = btn.closest('.case-study');
+  const wasOpen = card.classList.contains('open');
+  card.classList.toggle('open');
+  if (!wasOpen) {
+    setTimeout(() => {
+      const r = card.getBoundingClientRect();
+      if (r.top < 80) window.scrollTo({ top: window.scrollY + r.top - 80, behavior: 'smooth' });
+    }, 80);
+  }
+}
+
+function toggleApproach(btn) {
+  btn.closest('.approach-item').classList.toggle('open');
+}
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const t = document.querySelector(this.getAttribute('href'));
+    if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 70, behavior: 'smooth' }); }
+  });
+});
+</script>
+
+</body>
+</html>
