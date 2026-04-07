@@ -1125,7 +1125,9 @@
         <button class="intake-option" data-value="Support ops (triage, routing, AI-assisted responses)"><span class="intake-option-key">C</span> Support ops</button>
         <button class="intake-option" data-value="Feedback & data pipelines"><span class="intake-option-key">D</span> Feedback & data pipelines</button>
         <button class="intake-option" data-value="Not sure — need help scoping"><span class="intake-option-key">E</span> Not sure — need help scoping</button>
+        <button class="intake-option" data-value="Other"><span class="intake-option-key">F</span> Other</button>
       </div>
+      <input type="text" class="intake-input intake-other-input" id="intake-interest-other" placeholder="Tell me more...">
       <div class="intake-hint">Select all that apply, then press <kbd>Enter</kbd></div>
     </div>
 
@@ -1146,8 +1148,9 @@
       <h3 class="intake-question">What's your timeline?</h3>
       <div class="intake-options" data-field="timeline">
         <button class="intake-option" data-value="ASAP — this is urgent"><span class="intake-option-key">A</span> ASAP — this is urgent</button>
-        <button class="intake-option" data-value="1–3 months"><span class="intake-option-key">B</span> 1–3 months</button>
-        <button class="intake-option" data-value="Just exploring for now"><span class="intake-option-key">C</span> Just exploring for now</button>
+        <button class="intake-option" data-value="2–4 weeks"><span class="intake-option-key">B</span> 2–4 weeks</button>
+        <button class="intake-option" data-value="1–3 months"><span class="intake-option-key">C</span> 1–3 months</button>
+        <button class="intake-option" data-value="Just exploring for now"><span class="intake-option-key">D</span> Just exploring for now</button>
       </div>
     </div>
 
@@ -1373,7 +1376,13 @@ function collectStepData(step) {
       break;
     case 5: intakeData.company_stage = val; break;
     case 6: intakeData.biggest_bottleneck = val; break;
-    case 7: intakeData.areas_of_interest = val; break;
+    case 7:
+      intakeData.areas_of_interest = val;
+      const interestOther = document.getElementById('intake-interest-other').value.trim();
+      if (val.includes('Other') && interestOther) {
+        intakeData.areas_of_interest = val.map(v => v === 'Other' ? interestOther : v);
+      }
+      break;
     case 8: intakeData.tried_automating = val; break;
     case 9: intakeData.timeline = val; break;
     case 10: intakeData.budget_range = val || null; break;
@@ -1409,6 +1418,19 @@ function selectOption(btn, step) {
 
   if (isMulti) {
     btn.classList.toggle('selected');
+    // Handle "Other" toggle in multi-select
+    const otherInput = el.querySelector('.intake-other-input');
+    if (otherInput) {
+      if (btn.dataset.value === 'Other') {
+        if (btn.classList.contains('selected')) {
+          otherInput.classList.add('visible');
+          setTimeout(() => otherInput.focus(), 100);
+        } else {
+          otherInput.classList.remove('visible');
+          otherInput.value = '';
+        }
+      }
+    }
   } else {
     el.querySelectorAll('.intake-option').forEach(o => o.classList.remove('selected'));
     btn.classList.add('selected');
