@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Case Study: AI-Powered Operations Nervous System — Edozie Ezeanolue</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1017;
+    --surface: #141821;
+    --surface-2: #1a1f2a;
+    --border: #1e2433;
+    --border-light: #282f3e;
+    --text: #e8e4df;
+    --text-muted: #8a8580;
+    --text-dim: #5a5550;
+    --accent: #c9ff57;
+    --accent-dim: #c9ff5720;
+    --accent-mid: #c9ff5740;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  [data-theme="light"] {
+    --bg: #f4f1ec;
+    --surface: #e9e6e0;
+    --surface-2: #dfdcd6;
+    --border: #d0cdc6;
+    --border-light: #c4c0ba;
+    --text: #1a1816;
+    --text-muted: #5c5750;
+    --text-dim: #8a857e;
+    --accent: #3d6b00;
+    --accent-dim: #3d6b0018;
+    --accent-mid: #3d6b0035;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.7; }
+  .cs-page { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+  .cs-back {
+    font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim);
+    text-decoration: none; letter-spacing: 0.06em; display: inline-flex; align-items: center; gap: 0.4rem;
+    margin-bottom: 3rem; transition: color 0.2s;
+  }
+  .cs-back:hover { color: var(--accent); }
+  .cs-label {
+    font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem;
+  }
+  .cs-page h1 {
+    font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 400; line-height: 1.15; margin-bottom: 2rem; color: var(--text);
+  }
+  .cs-page h2 {
+    font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 1.7rem);
+    font-weight: 400; line-height: 1.2; margin-top: 3.5rem; margin-bottom: 1.25rem; color: var(--text);
+  }
+  .cs-page h3 {
+    font-family: var(--sans); font-size: 1.05rem; font-weight: 500;
+    margin-top: 2.5rem; margin-bottom: 0.75rem; color: var(--text);
+  }
+  .cs-page h4 {
+    font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent);
+    margin-top: 2rem; margin-bottom: 0.6rem;
+  }
+  .cs-page p { margin-bottom: 1.25rem; color: var(--text-muted); font-size: 1rem; }
+  .cs-page strong { color: var(--text); font-weight: 500; }
+  .cs-page ul, .cs-page ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: var(--text-muted); }
+  .cs-page li { margin-bottom: 0.5rem; font-size: 1rem; }
+  .cs-page li strong { color: var(--text); }
+  .cs-divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+  .cs-summary {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 2px;
+    padding: 1.75rem; margin-bottom: 2.5rem;
+  }
+  .cs-summary p { margin-bottom: 0.75rem; }
+  .cs-summary p:last-child { margin-bottom: 0; }
+  .cs-stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem; margin: 2rem 0;
+  }
+  .cs-stat {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 2px;
+    padding: 1.25rem;
+  }
+  .cs-stat-value {
+    font-family: var(--mono); font-size: 1.3rem; color: var(--accent);
+    margin-bottom: 0.35rem; font-weight: 500;
+  }
+  .cs-stat-label { font-size: 0.82rem; color: var(--text-dim); }
+  .cs-callout {
+    border-left: 2px solid var(--accent); padding: 1rem 1.25rem;
+    background: var(--accent-dim); margin: 1.5rem 0; border-radius: 0 2px 2px 0;
+  }
+  .cs-callout p { margin-bottom: 0; color: var(--text-muted); font-size: 0.95rem; }
+  .cs-code {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 2px;
+    padding: 1.25rem; margin: 1.25rem 0; overflow-x: auto;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--text-muted); line-height: 1.7;
+  }
+  .cs-schema-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; }
+  .cs-schema-table th, .cs-schema-table td {
+    text-align: left; padding: 0.6rem 0.85rem; border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+  }
+  .cs-schema-table th {
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-dim); font-weight: 500;
+  }
+  .cs-schema-table td { color: var(--text-muted); }
+  .cs-schema-table td:first-child { color: var(--text); font-weight: 500; }
+  .cs-footer {
+    margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .cs-footer span { font-family: var(--mono); font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.04em; }
+  .cs-footer a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+  .cs-footer a:hover { color: var(--accent); }
+  .theme-toggle {
+    position: fixed; top: 1.5rem; right: 1.5rem; background: none;
+    border: 1px solid var(--border); cursor: pointer; width: 32px; height: 32px;
+    border-radius: 2px; display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; color: var(--text-muted); transition: border-color 0.3s, color 0.3s; z-index: 100;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .theme-toggle .icon-sun { display: none; }
+  .theme-toggle .icon-moon { display: block; }
+  [data-theme="light"] .theme-toggle .icon-sun { display: block; }
+  [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+  /* Password gate */
+  .pw-gate {
+    position: fixed; inset: 0; z-index: 2000; background: var(--bg);
+    display: flex; align-items: center; justify-content: center; flex-direction: column;
+  }
+  .pw-gate.hidden { display: none; }
+  .pw-gate-inner { text-align: center; max-width: 360px; padding: 2rem; }
+  .pw-gate-icon { font-size: 2rem; margin-bottom: 1.5rem; color: var(--text-dim); }
+  .pw-gate h2 { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; margin-bottom: 0.75rem; }
+  .pw-gate p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .pw-gate input {
+    width: 100%; padding: 0.8rem 1rem; font-family: var(--mono); font-size: 0.9rem;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 2px;
+    color: var(--text); outline: none; text-align: center; margin-bottom: 0.75rem;
+  }
+  .pw-gate input:focus { border-color: var(--accent); }
+  .pw-gate input.error { border-color: #e05252; animation: shake 0.3s ease; }
+  .pw-gate button {
+    width: 100%; padding: 0.8rem; font-family: var(--mono); font-size: 0.78rem;
+    letter-spacing: 0.06em; text-transform: uppercase; background: var(--accent);
+    color: var(--bg); border: none; border-radius: 2px; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .pw-gate button:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-dim); }
+  .pw-gate .pw-back { margin-top: 1.5rem; }
+  .pw-gate .pw-back a { font-family: var(--mono); font-size: 0.7rem; color: var(--text-dim); text-decoration: none; }
+  .pw-gate .pw-back a:hover { color: var(--accent); }
+  @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+  .cs-content { display: none; }
+  .cs-content.unlocked { display: block; }
+
+  /* Workstream cards */
+  .ws-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 2px;
+    padding: 1.75rem; margin: 1.5rem 0;
+  }
+  .ws-card h3 { margin-top: 0; margin-bottom: 0.75rem; }
+  .ws-card ul { margin-bottom: 0; }
+
+  /* Tech stack grid */
+  .tech-grid {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.25rem 0;
+  }
+  .tech-tag {
+    font-family: var(--mono); font-size: 0.72rem; color: var(--text-muted);
+    background: var(--surface); border: 1px solid var(--border); border-radius: 2px;
+    padding: 0.35rem 0.7rem; letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 768px) {
+    .cs-page { padding: 2rem 1.5rem 4rem; }
+    .cs-stats { grid-template-columns: 1fr 1fr; }
+    .cs-footer { flex-direction: column; gap: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Password Gate -->
+<div class="pw-gate" id="pwGate">
+  <div class="pw-gate-inner">
+    <div class="pw-gate-icon">&#128274;</div>
+    <h2>This case study is private</h2>
+    <p>Enter the password to continue.</p>
+    <input type="password" id="pwInput" placeholder="Password" autocomplete="off">
+    <button onclick="checkPw()">Continue</button>
+    <div class="pw-back"><a href="/">&#8592; edozie.dev</a></div>
+  </div>
+</div>
+
+<div class="cs-content" id="csContent">
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+  <span class="icon-moon">&#9789;</span>
+  <span class="icon-sun">&#9788;</span>
+</button>
+
+<article class="cs-page">
+  <a href="/" class="cs-back">&#8592; edozie.dev</a>
+  <div class="cs-label">Case Study</div>
+  <h1>Building an AI-Powered Operations Nervous System for a High-Growth SaaS Startup</h1>
+
+  <div class="cs-summary">
+    <p>A single builder designed and deployed an end-to-end operations nervous system for a Series B vertical SaaS company (~150 employees, thousands of practitioners in a regulated industry). Over ~6 months, four workstreams delivered 50+ production automations across Make, n8n, HubSpot Workflows, and the Claude Agent SDK — connecting 12+ previously siloed business systems into a unified, self-documenting operational layer.</p>
+    <p><strong>The result: zero manual data entry across deals, leads, post-close handoffs, churn tracking, and feedback capture. Every automation fully documented. An AI agent that answers cross-system questions in seconds.</strong></p>
+  </div>
+
+  <div class="cs-stats">
+    <div class="cs-stat"><div class="cs-stat-value">50+</div><div class="cs-stat-label">Production automations</div></div>
+    <div class="cs-stat"><div class="cs-stat-value">5+</div><div class="cs-stat-label">Feedback sources unified</div></div>
+    <div class="cs-stat"><div class="cs-stat-value">0</div><div class="cs-stat-label">Manual data entry</div></div>
+    <div class="cs-stat"><div class="cs-stat-value">13</div><div class="cs-stat-label">MCP integrations</div></div>
+    <div class="cs-stat"><div class="cs-stat-value">4</div><div class="cs-stat-label">Workstreams delivered</div></div>
+  </div>
+
+  <h2>The Client</h2>
+  <p>Series B vertical SaaS serving thousands of practitioners in a regulated industry. Scaling revenue, headcount, and product surface area simultaneously with a lean operations team.</p>
+
+  <h2>The Problem</h2>
+  <p>Over two years of rapid growth, the company had accumulated <strong>12+ business systems</strong> — HubSpot, Intercom, Stripe, ClickUp, Notion, Gong, SmartLead, and several internal tools — none talking to each other. The operational friction was compounding across every team:</p>
+
+  <ul>
+    <li><strong>Sales:</strong> No real-time deal visibility, manual lead assignment, dropped post-close handoffs</li>
+    <li><strong>Customer Success:</strong> Churn signals buried in unread Slack messages, no structured cancellation data, support feedback forgotten</li>
+    <li><strong>Product:</strong> Feedback arriving through 5+ channels with no unified view</li>
+    <li><strong>Operations:</strong> Hours per week manually copying data between tools</li>
+  </ul>
+
+  <p>The company didn't need one automation. It needed <strong>an operations nervous system</strong> — a connective layer that made information flow automatically between every system, with AI handling the classification, enrichment, and routing that humans couldn't scale.</p>
+
+  <h2>The Solution: Four Workstreams Over ~6 Months</h2>
+
+  <div class="ws-card">
+    <h4>Workstream 1</h4>
+    <h3>Sales Automation Pipeline</h3>
+    <p>End-to-end automation of the sales operations lifecycle, from lead arrival to post-close handoff:</p>
+    <ul>
+      <li><strong>Automated lead assignment</strong> — round-robin distribution with Slack notifications and CRM sync</li>
+      <li><strong>Deal stage notifications</strong> — real-time visibility into pipeline movement</li>
+      <li><strong>Post-close automation</strong> — state machine managing the handoff from sales to onboarding</li>
+      <li><strong>Account manager assignment</strong> with AI enrichment</li>
+      <li><strong>Churn monitoring</strong> — automated detection and alerting</li>
+      <li><strong>Deduplication guards</strong> and error handling across every step</li>
+    </ul>
+  </div>
+
+  <div class="ws-card">
+    <h4>Workstream 2</h4>
+    <h3>Unified Feedback Intelligence</h3>
+    <p>Five-plus feedback sources collapsed into a single, AI-classified database:</p>
+    <ul>
+      <li><strong>Slack feedback capture</strong> — emoji reactions trigger AI categorization into structured threads</li>
+      <li><strong>Support conversation capture</strong> — Intercom messages flow through the same AI pipeline into the same database</li>
+      <li><strong>Meeting/call capture</strong> — auto-ingested from Gong</li>
+      <li><strong>Dynamic category management</strong> — categories created and updated directly from Slack</li>
+      <li><strong>Unified Notion database</strong> — single surface for product, CS, and leadership</li>
+    </ul>
+  </div>
+
+  <div class="ws-card">
+    <h4>Workstream 3</h4>
+    <h3>Customer Success Automation</h3>
+    <p>Structured systems for churn intelligence and support operations:</p>
+    <ul>
+      <li><strong>Churn tracking database</strong> — AI parsing of cancellation reasons, billing enrichment from Stripe, standardized taxonomy</li>
+      <li><strong>Automated churn outreach</strong> — AI-personalized win-back emails tailored by cancellation reason</li>
+      <li><strong>Support intelligence</strong> — AI tagging, routing, and enrichment of every support interaction</li>
+    </ul>
+  </div>
+
+  <div class="ws-card">
+    <h4>Workstream 4</h4>
+    <h3>Internal AI Operations Agent</h3>
+    <p>A cross-system AI agent built on the Claude Agent SDK running Claude Opus 4:</p>
+    <ul>
+      <li><strong>13 MCP integrations</strong> — connecting every major system in the stack</li>
+      <li><strong>Persistent knowledge brain</strong> — 6 domain-specific knowledge areas</li>
+      <li><strong>Sub-agent framework</strong> — specialized agents for different operational domains</li>
+      <li><strong>Full BigQuery analytics</strong> — querying across 3 GCP projects</li>
+      <li><strong>Teachable via .learn</strong> — team members extend the agent's knowledge naturally</li>
+      <li><strong>Source code access</strong> for automation lineage and debugging</li>
+    </ul>
+  </div>
+
+  <h2>Documentation Standard</h2>
+  <p>Every automation — all 50+ — includes comprehensive documentation:</p>
+  <ul>
+    <li><strong>Purpose and context</strong> — why this automation exists</li>
+    <li><strong>Mermaid flow diagrams</strong> — visual representation of the logic</li>
+    <li><strong>Step-by-step breakdown</strong> — what each node does</li>
+    <li><strong>Data dependencies</strong> — which systems feed in, which systems receive output</li>
+    <li><strong>Guardrails</strong> — what prevents failures, deduplication logic, error paths</li>
+    <li><strong>Operations runbook</strong> — how to monitor, troubleshoot, and maintain</li>
+    <li><strong>Cross-references</strong> — links to related automations and data flows</li>
+  </ul>
+  <p>Three system-level <strong>Complete Flow Maps</strong> document how all automations interconnect across the entire operations layer.</p>
+
+  <hr class="cs-divider">
+
+  <h2>Results</h2>
+  <div class="cs-stats">
+    <div class="cs-stat"><div class="cs-stat-value">50+</div><div class="cs-stat-label">Production automations across Make, n8n, HubSpot Workflows, Claude Agent SDK</div></div>
+    <div class="cs-stat"><div class="cs-stat-value">5+</div><div class="cs-stat-label">Feedback sources unified into a single database</div></div>
+    <div class="cs-stat"><div class="cs-stat-value">0</div><div class="cs-stat-label">Manual data entry for deals, leads, post-close, churn, feedback</div></div>
+    <div class="cs-stat"><div class="cs-stat-value">Seconds</div><div class="cs-stat-label">AI agent answers cross-system questions</div></div>
+  </div>
+
+  <p><strong>Real-time deal visibility</strong> — every deal stage change, assignment, and handoff visible instantly across Slack and CRM.</p>
+  <p><strong>Single feedback surface</strong> — product, support, and call feedback unified into one queryable database with AI classification.</p>
+  <p><strong>Structured churn intelligence</strong> — every cancellation detected, classified, enriched, and responded to automatically.</p>
+  <p><strong>Self-documenting system</strong> — every automation fully documented with flow diagrams, runbooks, and cross-references.</p>
+
+  <h2>Technical Stack</h2>
+  <h4>Orchestration</h4>
+  <div class="tech-grid">
+    <span class="tech-tag">Make (primary)</span>
+    <span class="tech-tag">n8n</span>
+    <span class="tech-tag">HubSpot Workflows</span>
+  </div>
+  <h4>AI &amp; Intelligence</h4>
+  <div class="tech-grid">
+    <span class="tech-tag">Anthropic Claude Agent SDK</span>
+    <span class="tech-tag">Claude Opus 4</span>
+    <span class="tech-tag">OpenAI</span>
+    <span class="tech-tag">MCP</span>
+  </div>
+  <h4>Business Systems</h4>
+  <div class="tech-grid">
+    <span class="tech-tag">HubSpot</span>
+    <span class="tech-tag">Intercom</span>
+    <span class="tech-tag">Stripe</span>
+    <span class="tech-tag">Slack</span>
+    <span class="tech-tag">Notion</span>
+    <span class="tech-tag">ClickUp</span>
+    <span class="tech-tag">Gong</span>
+    <span class="tech-tag">SmartLead</span>
+  </div>
+  <h4>Data &amp; Infrastructure</h4>
+  <div class="tech-grid">
+    <span class="tech-tag">BigQuery</span>
+    <span class="tech-tag">GrowthBook</span>
+    <span class="tech-tag">Google Calendar</span>
+    <span class="tech-tag">Firecrawl</span>
+    <span class="tech-tag">Railway</span>
+    <span class="tech-tag">n8n Cloud</span>
+  </div>
+
+  <hr class="cs-divider">
+
+  <h2>Key Insight</h2>
+  <div class="cs-callout">
+    <p>The most valuable thing built wasn't any single automation — it was the <strong>system of systems</strong>.</p>
+  </div>
+  <p>Each automation is useful alone, but the real leverage comes from the connections between them. A deal closing triggers a notification AND a sequence AND an assignment. A support message triggers classification AND logging AND routing. A cancellation triggers detection AND categorization AND personalized outreach.</p>
+  <p>Most companies automate in silos. The unlock is automating the connections.</p>
+
+  <div class="cs-footer">
+    <span>&copy; 2026 Edozie Ezeanolue</span>
+    <a href="/">edozie.dev</a>
+  </div>
+</article>
+
+</div><!-- end cs-content -->
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch(e) {}
+}
+function checkPw() {
+  const input = document.getElementById('pwInput');
+  if (input.value === 'ezeanolue.dev123$') {
+    document.getElementById('pwGate').classList.add('hidden');
+    document.getElementById('csContent').classList.add('unlocked');
+    try { sessionStorage.setItem('cs_auth', '1'); } catch(e) {}
+  } else {
+    input.classList.add('error');
+    setTimeout(() => input.classList.remove('error'), 600);
+  }
+}
+// Auto-unlock if already authenticated this session
+(function() {
+  try { if (sessionStorage.getItem('cs_auth') === '1') { document.getElementById('pwGate').classList.add('hidden'); document.getElementById('csContent').classList.add('unlocked'); } } catch(e) {}
+})();
+document.getElementById('pwInput').addEventListener('keydown', function(e) { if (e.key === 'Enter') checkPw(); });
+</script>
+</body>
+</html>
