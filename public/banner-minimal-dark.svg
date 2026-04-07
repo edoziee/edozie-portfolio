@@ -7,7 +7,7 @@
   <rect width="1584" height="396" fill="#0d1017"/>
   <line x1="0" y1="393" x2="1584" y2="393" stroke="#1e2433" stroke-width="1"/>
   <!-- Label -->
-  <text x="792" y="135" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="500" letter-spacing="0.14em" fill="#c9ff57">INCOMING ANESTHESIOLOGY RESIDENT · AI OPERATIONS ARCHITECT</text>
+  <text x="792" y="135" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="500" letter-spacing="0.14em" fill="#c9ff57">MD CANDIDATE · AI OPERATIONS ARCHITECT</text>
   <!-- Domain -->
   <text x="792" y="215" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="52" font-weight="400" fill="#e8e4df" letter-spacing="0.02em">edozie.dev</text>
   <!-- Subtle accent dot -->
