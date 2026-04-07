@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Case Study: AI-Powered Churn Intelligence — Edozie Ezeanolue</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1017;
+    --surface: #141821;
+    --surface-2: #1a1f2a;
+    --border: #1e2433;
+    --border-light: #282f3e;
+    --text: #e8e4df;
+    --text-muted: #8a8580;
+    --text-dim: #5a5550;
+    --accent: #c9ff57;
+    --accent-dim: #c9ff5720;
+    --accent-mid: #c9ff5740;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  [data-theme="light"] {
+    --bg: #f4f1ec;
+    --surface: #e9e6e0;
+    --surface-2: #dfdcd6;
+    --border: #d0cdc6;
+    --border-light: #c4c0ba;
+    --text: #1a1816;
+    --text-muted: #5c5750;
+    --text-dim: #8a857e;
+    --accent: #3d6b00;
+    --accent-dim: #3d6b0018;
+    --accent-mid: #3d6b0035;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.7; }
+  .cs-page { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+  .cs-back {
+    font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim);
+    text-decoration: none; letter-spacing: 0.06em; display: inline-flex; align-items: center; gap: 0.4rem;
+    margin-bottom: 3rem; transition: color 0.2s;
+  }
+  .cs-back:hover { color: var(--accent); }
+  .cs-label {
+    font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem;
+  }
+  .cs-page h1 {
+    font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 400; line-height: 1.15; margin-bottom: 2rem; color: var(--text);
+  }
+  .cs-page h2 {
+    font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 1.7rem);
+    font-weight: 400; line-height: 1.2; margin-top: 3.5rem; margin-bottom: 1.25rem; color: var(--text);
+  }
+  .cs-page h3 {
+    font-family: var(--sans); font-size: 1.05rem; font-weight: 500;
+    margin-top: 2.5rem; margin-bottom: 0.75rem; color: var(--text);
+  }
+  .cs-page h4 {
+    font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent);
+    margin-top: 2rem; margin-bottom: 0.6rem;
+  }
+  .cs-page p { margin-bottom: 1.25rem; color: var(--text-muted); font-size: 1rem; }
+  .cs-page strong { color: var(--text); font-weight: 500; }
+  .cs-page ul, .cs-page ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: var(--text-muted); }
+  .cs-page li { margin-bottom: 0.5rem; font-size: 1rem; }
+  .cs-page li strong { color: var(--text); }
+  .cs-divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+  .cs-summary {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 2px;
+    padding: 1.75rem; margin-bottom: 2.5rem;
+  }
+  .cs-summary p { margin-bottom: 0.75rem; }
+  .cs-summary p:last-child { margin-bottom: 0; }
+  .cs-stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem; margin: 2rem 0;
+  }
+  .cs-stat {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 2px;
+    padding: 1.25rem;
+  }
+  .cs-stat-value {
+    font-family: var(--mono); font-size: 1.3rem; color: var(--accent);
+    margin-bottom: 0.35rem; font-weight: 500;
+  }
+  .cs-stat-label { font-size: 0.82rem; color: var(--text-dim); }
+  .cs-callout {
+    border-left: 2px solid var(--accent); padding: 1rem 1.25rem;
+    background: var(--accent-dim); margin: 1.5rem 0; border-radius: 0 2px 2px 0;
+  }
+  .cs-callout p { margin-bottom: 0; color: var(--text-muted); font-size: 0.95rem; }
+  .cs-code {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 2px;
+    padding: 1.25rem; margin: 1.25rem 0; overflow-x: auto;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--text-muted); line-height: 1.7;
+  }
+  .cs-schema-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; }
+  .cs-schema-table th, .cs-schema-table td {
+    text-align: left; padding: 0.6rem 0.85rem; border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+  }
+  .cs-schema-table th {
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-dim); font-weight: 500;
+  }
+  .cs-schema-table td { color: var(--text-muted); }
+  .cs-schema-table td:first-child { color: var(--text); font-weight: 500; }
+  .cs-footer {
+    margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .cs-footer span { font-family: var(--mono); font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.04em; }
+  .cs-footer a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+  .cs-footer a:hover { color: var(--accent); }
+  .theme-toggle {
+    position: fixed; top: 1.5rem; right: 1.5rem; background: none;
+    border: 1px solid var(--border); cursor: pointer; width: 32px; height: 32px;
+    border-radius: 2px; display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; color: var(--text-muted); transition: border-color 0.3s, color 0.3s; z-index: 100;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .theme-toggle .icon-sun { display: none; }
+  .theme-toggle .icon-moon { display: block; }
+  [data-theme="light"] .theme-toggle .icon-sun { display: block; }
+  [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+  /* Password gate */
+  .pw-gate {
+    position: fixed; inset: 0; z-index: 2000; background: var(--bg);
+    display: flex; align-items: center; justify-content: center; flex-direction: column;
+  }
+  .pw-gate.hidden { display: none; }
+  .pw-gate-inner { text-align: center; max-width: 360px; padding: 2rem; }
+  .pw-gate-icon { font-size: 2rem; margin-bottom: 1.5rem; color: var(--text-dim); }
+  .pw-gate h2 { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; margin-bottom: 0.75rem; }
+  .pw-gate p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .pw-gate input {
+    width: 100%; padding: 0.8rem 1rem; font-family: var(--mono); font-size: 0.9rem;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 2px;
+    color: var(--text); outline: none; text-align: center; margin-bottom: 0.75rem;
+  }
+  .pw-gate input:focus { border-color: var(--accent); }
+  .pw-gate input.error { border-color: #e05252; animation: shake 0.3s ease; }
+  .pw-gate button {
+    width: 100%; padding: 0.8rem; font-family: var(--mono); font-size: 0.78rem;
+    letter-spacing: 0.06em; text-transform: uppercase; background: var(--accent);
+    color: var(--bg); border: none; border-radius: 2px; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .pw-gate button:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-dim); }
+  .pw-gate .pw-back { margin-top: 1.5rem; }
+  .pw-gate .pw-back a { font-family: var(--mono); font-size: 0.7rem; color: var(--text-dim); text-decoration: none; }
+  .pw-gate .pw-back a:hover { color: var(--accent); }
+  @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+  .cs-content { display: none; }
+  .cs-content.unlocked { display: block; }
+
+  @media (max-width: 768px) {
+    .cs-page { padding: 2rem 1.5rem 4rem; }
+    .cs-stats { grid-template-columns: 1fr 1fr; }
+    .cs-footer { flex-direction: column; gap: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Password Gate -->
+<div class="pw-gate" id="pwGate">
+  <div class="pw-gate-inner">
+    <div class="pw-gate-icon">&#128274;</div>
+    <h2>This case study is private</h2>
+    <p>Enter the password to continue.</p>
+    <input type="password" id="pwInput" placeholder="Password" autocomplete="off">
+    <button onclick="checkPw()">Continue</button>
+    <div class="pw-back"><a href="/">&#8592; edozie.dev</a></div>
+  </div>
+</div>
+
+<div class="cs-content" id="csContent">
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+  <span class="icon-moon">&#9789;</span>
+  <span class="icon-sun">&#9788;</span>
+</button>
+
+<article class="cs-page">
+  <a href="/" class="cs-back">&#8592; edozie.dev</a>
+  <div class="cs-label">Case Study</div>
+  <h1>AI-Powered Churn Intelligence — From Cancellation Detection to Personalized Win-Back in Under 60 Seconds</h1>
+
+  <div class="cs-summary">
+    <p>A single builder designed and deployed an end-to-end churn intelligence system for a high-growth vertical SaaS company. The system detects every customer cancellation in real-time, extracts the reason using AI, classifies it into a standardized 12-category taxonomy, enriches it with billing data, logs it to a structured database, and automatically drafts a personalized win-back email with a tailored discount offer.</p>
+    <p><strong>Cancellation to personalized win-back email draft: under 60 seconds.</strong></p>
+  </div>
+
+  <div class="cs-stats">
+    <div class="cs-stat"><div class="cs-stat-value">&lt; 60s</div><div class="cs-stat-label">Cancellation to win-back draft</div></div>
+    <div class="cs-stat"><div class="cs-stat-value">&lt; 30s</div><div class="cs-stat-label">Cancellation to database entry</div></div>
+    <div class="cs-stat"><div class="cs-stat-value">12</div><div class="cs-stat-label">Category churn taxonomy</div></div>
+    <div class="cs-stat"><div class="cs-stat-value">3</div><div class="cs-stat-label">Reason-aware offer paths</div></div>
+  </div>
+
+  <h2>The Problem</h2>
+  <p>The company had thousands of paying subscribers. Customers cancelled regularly — some for addressable reasons (cost, feature gaps, quality regression), some for non-addressable reasons (retirement, career change). But the company had no systematic way to detect, understand, or respond to churn.</p>
+  <p><strong>Cancellations were invisible.</strong> When a customer cancelled, a notification posted to a Slack channel. No one systematically read every post. No one aggregated the reasons. Cancellations were noticed days later — if at all.</p>
+  <p><strong>Reasons were unstructured.</strong> Customers provided a reason and optional comment when cancelling. These lived in Slack as raw text. No structured database, no taxonomy, no way to answer "what percentage of cancellations this month were cost-related?"</p>
+  <p><strong>Win-back outreach was manual and slow.</strong> When someone noticed a cancellation worth pursuing: read the Slack post, look up the customer in CRM and billing, draft a personalized email, send it. 15–30 minutes per cancellation — by which time the win-back window had often closed.</p>
+  <p><strong>No trend analysis possible.</strong> Leadership couldn't answer: "Top 3 cancellation reasons this quarter?" "Are cost complaints increasing?" "Do psychiatrists churn differently from primary care?" No database to query.</p>
+
+  <h2>The Solution: A Three-Stage Pipeline</h2>
+
+  <h3>Stage 1: Detect &amp; Notify</h3>
+  <h4>Trigger: stripe.subscription.canceled webhook</h4>
+  <p>When a customer cancels, a structured Slack notification posts to #users-cancelling with:</p>
+  <ul>
+    <li>Customer email and medical specialty</li>
+    <li>Plan type and pricing cadence (monthly/annual)</li>
+    <li>Number of licenses</li>
+    <li>Churn risk assessment</li>
+    <li>Selected cancellation reason (dropdown)</li>
+    <li>Verbatim free-text comment (customer's own words)</li>
+  </ul>
+  <p>This notification is the source event that triggers both Stage 2 and Stage 3.</p>
+
+  <h3>Stage 2: Classify &amp; Store (The Churn Database)</h3>
+  <h4>Trigger: Slack event in #users-cancelling</h4>
+
+  <p><strong>Pass 1 — AI Extraction:</strong> An LLM reads the cancellation post and extracts user_email, selected_reason, and cancellation_response. If no reason AND no comment exist, the LLM returns "N/A" and the pipeline stops.</p>
+
+  <p><strong>Pass 2 — AI Categorization:</strong> A second LLM pass classifies into a 12-category taxonomy:</p>
+  <ol>
+    <li><strong>Temporary Unsubscription</strong> — "Taking a break, will be back"</li>
+    <li><strong>Customization/Formatting</strong> — "Templates don't match my workflow"</li>
+    <li><strong>Cost Concerns</strong> — "Too expensive"</li>
+    <li><strong>Approval &amp; Legal Concerns</strong> — "Organization won't approve AI tools"</li>
+    <li><strong>Transcription Accuracy/Note Quality</strong> — "Notes aren't accurate enough"</li>
+    <li><strong>Competitor Comparison</strong> — "Switching to [competitor]"</li>
+    <li><strong>Personalization</strong> — "Doesn't adapt to my specialty"</li>
+    <li><strong>Personal Circumstance</strong> — "Retiring / changing careers"</li>
+    <li><strong>Technical &amp; Performance Issues</strong> — "Crashes / too slow / bugs"</li>
+    <li><strong>Usage Frequency</strong> — "Don't see enough patients"</li>
+    <li><strong>No Time Saved</strong> — "Not faster than my current workflow"</li>
+    <li><strong>False Churn</strong> — Accidental cancellation or billing issue</li>
+  </ol>
+
+  <p><strong>Billing Enrichment:</strong> Queries Stripe by email → retrieves canceled_at timestamp. This is the authoritative Unsub Date (from Stripe, not the Slack post time).</p>
+
+  <p><strong>Database Write (Notion):</strong> Searches the Churn Database for an existing record:</p>
+  <ul>
+    <li><strong>No record:</strong> Creates a new row with all fields</li>
+    <li><strong>Existing record with blank comment:</strong> Updates — replaces N/A with verbatim text</li>
+    <li><strong>Existing record with prior comment:</strong> Writes to "Follow Up Comment" field — preserving both</li>
+  </ul>
+  <p>This create/update logic builds <strong>longitudinal history</strong>. One row per customer, enriched over time.</p>
+
+  <h3>Stage 3: Draft &amp; Flag (The Win-Back Email)</h3>
+  <h4>Trigger: Same Slack event (runs in parallel with Stage 2)</h4>
+
+  <p><strong>Identity Resolution:</strong> Email → Stripe customer → CRM contact (HubSpot).</p>
+
+  <p><strong>AI Email Composition — three distinct paths:</strong></p>
+
+  <div class="cs-callout">
+    <p><strong>Cost-related:</strong> Offer $49.50/month for 6 months. Tone: empathetic to budget, emphasize ROI. References upcoming improvements.</p>
+  </div>
+  <div class="cs-callout">
+    <p><strong>Other addressable reason:</strong> Offer 50% off for 3 months. Acknowledges their specific stated concern. References their verbatim comment.</p>
+  </div>
+  <div class="cs-callout">
+    <p><strong>Non-addressable (retirement, career change):</strong> Returns "N/A" — no email drafted. A discount is irrelevant to someone who's retiring.</p>
+  </div>
+
+  <p>Emails are saved as <strong>Gmail drafts (NOT auto-sent)</strong> for human review. Subject line, HTML body, recipient — all pre-filled. CRM contact flagged with churn_exit_interview_email_status = ready_to_send.</p>
+
+  <p><strong>Why drafts, not auto-send:</strong> Win-back emails are high-stakes. A bad one burns the relationship permanently. The AI eliminates drafting time (15–30 min → instant). The human retains judgment.</p>
+
+  <h2>The Churn Database Schema</h2>
+  <table class="cs-schema-table">
+    <thead><tr><th>Field</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>Email</td><td>Customer identifier (title)</td></tr>
+      <tr><td>Selected Reason</td><td>Dropdown choice at cancellation</td></tr>
+      <tr><td>General Category</td><td>AI-classified (12-category taxonomy)</td></tr>
+      <tr><td>Cancellation Comment</td><td>Verbatim, unedited customer text</td></tr>
+      <tr><td>Follow Up Comment</td><td>If they cancel again — new text preserved separately</td></tr>
+      <tr><td>Notes</td><td>AI explanation of the classification</td></tr>
+      <tr><td>Unsub Date</td><td>From Stripe canceled_at</td></tr>
+      <tr><td>Plan Type</td><td>Tier at time of cancellation</td></tr>
+      <tr><td>Number of Licenses</td><td>Seats on subscription</td></tr>
+      <tr><td>Competitor</td><td>Reserved for competitive intel enrichment</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Outcomes</h2>
+  <div class="cs-stats">
+    <div class="cs-stat"><div class="cs-stat-value">&lt; 30s</div><div class="cs-stat-label">To structured database entry</div></div>
+    <div class="cs-stat"><div class="cs-stat-value">&lt; 60s</div><div class="cs-stat-label">To personalized win-back draft</div></div>
+    <div class="cs-stat"><div class="cs-stat-value">15–30 min</div><div class="cs-stat-label">Previously per cancellation</div></div>
+    <div class="cs-stat"><div class="cs-stat-value">Days</div><div class="cs-stat-label">Previously to even notice</div></div>
+  </div>
+
+  <p><strong>Structured data (previously nonexistent):</strong> Every reason classified into 12-category taxonomy. Queryable: "top reasons this month," "cost churn trend," "cancellation rate by specialty," "false churn percentage." Longitudinal: customers who cancel, return, and cancel again have connected history.</p>
+
+  <p><strong>Personalized outreach:</strong> Emails reference the customer's specific reason — not generic. Offers are reason-aware. Non-addressable cancellations intentionally skipped.</p>
+
+  <p><strong>Human-in-the-loop:</strong> Drafts, not auto-sends — team reviews before sending. CRM flagging triggers exit interview workflow. AI handles speed; humans retain judgment.</p>
+
+  <h2>Key Design Insights</h2>
+  <ol>
+    <li><strong>Reason-aware offers outperform generic discounts</strong> — A customer who left for cost gets a specific dollar amount ($49.50/month) — not a vague "discount." Three-way routing dramatically outperforms one-size-fits-all.</li>
+    <li><strong>Drafts, not auto-sends, is the right default</strong> — AI draft eliminates writing time. Human review preserves judgment. Speed of auto-send, quality of hand-crafted.</li>
+    <li><strong>The taxonomy enables questions you couldn't ask before</strong> — "34% cost concerns (up from 28% last quarter), 22% accuracy (down from 31%), 15% competitor (stable), 12% temporary (seasonal)."</li>
+    <li><strong>Stripe timestamps, not Slack timestamps</strong> — Unsub Date comes from Stripe's canceled_at, not the Slack notification time. For cohort analysis, this matters.</li>
+    <li><strong>Create/update logic builds longitudinal history</strong> — Captures the full customer journey across multiple cancellations.</li>
+  </ol>
+
+  <hr class="cs-divider">
+
+  <h2>Builder's Note</h2>
+  <p>Churn is not an event — it's a signal. Every cancellation contains information: why the customer left, what they valued, what they didn't, and how addressable their reason is. The company was already generating this signal — customers told them why they were leaving. It was just being thrown away.</p>
+  <p>This system makes churn legible. Every cancellation becomes a structured data point for trend analysis, a personalized outreach opportunity that arrives while the window is still open, and a longitudinal record that reveals patterns invisible in snapshots.</p>
+  <p>The fastest win-back email can't save a customer who left for the right reasons. But a personalized, timely, reason-aware email — drafted by AI and reviewed by a human — catches the ones who left for reasons the company can actually address.</p>
+
+  <div class="cs-footer">
+    <span>&copy; 2026 Edozie Ezeanolue</span>
+    <a href="/">edozie.dev</a>
+  </div>
+</article>
+
+</div><!-- end cs-content -->
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch(e) {}
+}
+function checkPw() {
+  const input = document.getElementById('pwInput');
+  if (input.value === 'ezeanolue.dev123$') {
+    document.getElementById('pwGate').classList.add('hidden');
+    document.getElementById('csContent').classList.add('unlocked');
+    try { sessionStorage.setItem('cs_auth', '1'); } catch(e) {}
+  } else {
+    input.classList.add('error');
+    setTimeout(() => input.classList.remove('error'), 600);
+  }
+}
+// Auto-unlock if already authenticated this session
+(function() {
+  try { if (sessionStorage.getItem('cs_auth') === '1') { document.getElementById('pwGate').classList.add('hidden'); document.getElementById('csContent').classList.add('unlocked'); } } catch(e) {}
+})();
+document.getElementById('pwInput').addEventListener('keydown', function(e) { if (e.key === 'Enter') checkPw(); });
+</script>
+</body>
+</html>
