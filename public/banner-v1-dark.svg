@@ -2,8 +2,8 @@
   <defs><style>@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap');</style></defs>
   <rect width="1584" height="396" fill="#0d1017"/>
   <line x1="0" y1="393" x2="1584" y2="393" stroke="#1e2433" stroke-width="1"/>
-  <text x="792" y="120" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="16" font-weight="500" letter-spacing="0.14em" fill="#c9ff57">MD CANDIDATE · AI OPERATIONS ARCHITECT</text>
-  <text x="792" y="215" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="68" font-weight="400" fill="#e8e4df" letter-spacing="0.02em">edozie.dev</text>
+  <text x="792" y="120" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="15" font-weight="500" letter-spacing="0.14em" fill="#c9ff57">MD CANDIDATE · AI OPERATIONS ARCHITECT</text>
+  <text x="792" y="215" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="50" font-weight="400" fill="#e8e4df" letter-spacing="0.02em">edozie.dev</text>
   <rect x="590" y="280" width="404" height="36" rx="18" fill="none" stroke="#1e2433" stroke-width="1"/>
   <circle cx="620" cy="298" r="5" fill="#c9ff57"/>
   <text x="638" y="303" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="500" letter-spacing="0.1em" fill="#8a8580">AVAILABLE FOR CONSULTING ENGAGEMENTS</text>
