@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1584" height="396" viewBox="0 0 1584 396">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap');
+    </style>
+  </defs>
+  <rect width="1584" height="396" fill="#f4f1ec"/>
+  <line x1="0" y1="393" x2="1584" y2="393" stroke="#d0cdc6" stroke-width="1"/>
+  <!-- Accent line -->
+  <rect x="140" y="145" width="32" height="3" rx="1" fill="#3d6b00"/>
+  <!-- Name -->
+  <text x="140" y="200" font-family="'DM Serif Display', Georgia, serif" font-size="48" font-weight="400" fill="#1a1816">Edozie Ezeanolue</text>
+  <!-- Title -->
+  <text x="143" y="240" font-family="'JetBrains Mono', monospace" font-size="15" font-weight="400" letter-spacing="0.08em" fill="#3d6b00">AI Operations Architect</text>
+  <!-- Domain, right side -->
+  <text x="1444" y="240" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="400" letter-spacing="0.06em" fill="#5c5750">edozie.dev</text>
+</svg>
