@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Case Study: Four Interlocking AI Support Systems — Edozie Ezeanolue</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1017;
+    --surface: #141821;
+    --surface-2: #1a1f2a;
+    --border: #1e2433;
+    --border-light: #282f3e;
+    --text: #e8e4df;
+    --text-muted: #8a8580;
+    --text-dim: #5a5550;
+    --accent: #c9ff57;
+    --accent-dim: #c9ff5720;
+    --accent-mid: #c9ff5740;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  [data-theme="light"] {
+    --bg: #f4f1ec;
+    --surface: #e9e6e0;
+    --surface-2: #dfdcd6;
+    --border: #d0cdc6;
+    --border-light: #c4c0ba;
+    --text: #1a1816;
+    --text-muted: #5c5750;
+    --text-dim: #8a857e;
+    --accent: #3d6b00;
+    --accent-dim: #3d6b0018;
+    --accent-mid: #3d6b0035;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.7; }
+  .cs-page { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+  .cs-back {
+    font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim);
+    text-decoration: none; letter-spacing: 0.06em; display: inline-flex; align-items: center; gap: 0.4rem;
+    margin-bottom: 3rem; transition: color 0.2s;
+  }
+  .cs-back:hover { color: var(--accent); }
+  .cs-label {
+    font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem;
+  }
+  .cs-page h1 {
+    font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 400; line-height: 1.15; margin-bottom: 2rem; color: var(--text);
+  }
+  .cs-page h2 {
+    font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 1.7rem);
+    font-weight: 400; line-height: 1.2; margin-top: 3.5rem; margin-bottom: 1.25rem; color: var(--text);
+  }
+  .cs-page h3 {
+    font-family: var(--sans); font-size: 1.05rem; font-weight: 500;
+    margin-top: 2.5rem; margin-bottom: 0.75rem; color: var(--text);
+  }
+  .cs-page h4 {
+    font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent);
+    margin-top: 2rem; margin-bottom: 0.6rem;
+  }
+  .cs-page p { margin-bottom: 1.25rem; color: var(--text-muted); font-size: 1rem; }
+  .cs-page strong { color: var(--text); font-weight: 500; }
+  .cs-page ul, .cs-page ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: var(--text-muted); }
+  .cs-page li { margin-bottom: 0.5rem; font-size: 1rem; }
+  .cs-page li strong { color: var(--text); }
+  .cs-divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+  .cs-summary {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 2px;
+    padding: 1.75rem; margin-bottom: 2.5rem;
+  }
+  .cs-summary p { margin-bottom: 0.75rem; }
+  .cs-summary p:last-child { margin-bottom: 0; }
+  .cs-stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem; margin: 2rem 0;
+  }
+  .cs-stat {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 2px;
+    padding: 1.25rem;
+  }
+  .cs-stat-value {
+    font-family: var(--mono); font-size: 1.3rem; color: var(--accent);
+    margin-bottom: 0.35rem; font-weight: 500;
+  }
+  .cs-stat-label { font-size: 0.82rem; color: var(--text-dim); }
+  .cs-callout {
+    border-left: 2px solid var(--accent); padding: 1rem 1.25rem;
+    background: var(--accent-dim); margin: 1.5rem 0; border-radius: 0 2px 2px 0;
+  }
+  .cs-callout p { margin-bottom: 0; color: var(--text-muted); font-size: 0.95rem; }
+  .cs-code {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 2px;
+    padding: 1.25rem; margin: 1.25rem 0; overflow-x: auto;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--text-muted); line-height: 1.7;
+  }
+  .cs-schema-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; }
+  .cs-schema-table th, .cs-schema-table td {
+    text-align: left; padding: 0.6rem 0.85rem; border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+  }
+  .cs-schema-table th {
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-dim); font-weight: 500;
+  }
+  .cs-schema-table td { color: var(--text-muted); }
+  .cs-schema-table td:first-child { color: var(--text); font-weight: 500; }
+  .cs-footer {
+    margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .cs-footer span { font-family: var(--mono); font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.04em; }
+  .cs-footer a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+  .cs-footer a:hover { color: var(--accent); }
+  .theme-toggle {
+    position: fixed; top: 1.5rem; right: 1.5rem; background: none;
+    border: 1px solid var(--border); cursor: pointer; width: 32px; height: 32px;
+    border-radius: 2px; display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; color: var(--text-muted); transition: border-color 0.3s, color 0.3s; z-index: 100;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .theme-toggle .icon-sun { display: none; }
+  .theme-toggle .icon-moon { display: block; }
+  [data-theme="light"] .theme-toggle .icon-sun { display: block; }
+  [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+  /* Password gate */
+  .pw-gate {
+    position: fixed; inset: 0; z-index: 2000; background: var(--bg);
+    display: flex; align-items: center; justify-content: center; flex-direction: column;
+  }
+  .pw-gate.hidden { display: none; }
+  .pw-gate-inner { text-align: center; max-width: 360px; padding: 2rem; }
+  .pw-gate-icon { font-size: 2rem; margin-bottom: 1.5rem; color: var(--text-dim); }
+  .pw-gate h2 { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; margin-bottom: 0.75rem; }
+  .pw-gate p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .pw-gate input {
+    width: 100%; padding: 0.8rem 1rem; font-family: var(--mono); font-size: 0.9rem;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 2px;
+    color: var(--text); outline: none; text-align: center; margin-bottom: 0.75rem;
+  }
+  .pw-gate input:focus { border-color: var(--accent); }
+  .pw-gate input.error { border-color: #e05252; animation: shake 0.3s ease; }
+  .pw-gate button {
+    width: 100%; padding: 0.8rem; font-family: var(--mono); font-size: 0.78rem;
+    letter-spacing: 0.06em; text-transform: uppercase; background: var(--accent);
+    color: var(--bg); border: none; border-radius: 2px; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .pw-gate button:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-dim); }
+  .pw-gate .pw-back { margin-top: 1.5rem; }
+  .pw-gate .pw-back a { font-family: var(--mono); font-size: 0.7rem; color: var(--text-dim); text-decoration: none; }
+  .pw-gate .pw-back a:hover { color: var(--accent); }
+  @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+  .cs-content { display: none; }
+  .cs-content.unlocked { display: block; }
+
+  @media (max-width: 768px) {
+    .cs-page { padding: 2rem 1.5rem 4rem; }
+    .cs-stats { grid-template-columns: 1fr 1fr; }
+    .cs-footer { flex-direction: column; gap: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Password Gate -->
+<div class="pw-gate" id="pwGate">
+  <div class="pw-gate-inner">
+    <div class="pw-gate-icon">&#128274;</div>
+    <h2>This case study is private</h2>
+    <p>Enter the password to continue.</p>
+    <input type="password" id="pwInput" placeholder="Password" autocomplete="off">
+    <button onclick="checkPw()">Continue</button>
+    <div class="pw-back"><a href="/">&#8592; edozie.dev</a></div>
+  </div>
+</div>
+
+<div class="cs-content" id="csContent">
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+  <span class="icon-moon">&#9789;</span>
+  <span class="icon-sun">&#9788;</span>
+</button>
+
+<article class="cs-page">
+  <a href="/" class="cs-back">&#8592; edozie.dev</a>
+  <div class="cs-label">Case Study</div>
+  <h1>Four Interlocking AI Systems That Transformed a Customer Support Operation</h1>
+
+  <div class="cs-summary">
+    <p>A single builder designed and deployed a suite of four AI-powered systems that collectively transformed how a high-growth vertical SaaS company (~150 employees, thousands of customers) handles customer support. The systems work together to automatically enrich, triage, classify, route, reply to, escalate, and capture praise from every inbound support conversation.</p>
+    <p><strong>Four systems. Zero manual triage. Every conversation enriched, classified, and routed before an agent touches it.</strong></p>
+  </div>
+
+  <div class="cs-stats">
+    <div class="cs-stat"><div class="cs-stat-value">Near zero</div><div class="cs-stat-label">Manual triage required</div></div>
+    <div class="cs-stat"><div class="cs-stat-value">&lt; 30s</div><div class="cs-stat-label">Structured escalation tickets</div></div>
+    <div class="cs-stat"><div class="cs-stat-value">4</div><div class="cs-stat-label">Interlocking AI systems</div></div>
+    <div class="cs-stat"><div class="cs-stat-value">2–5 min</div><div class="cs-stat-label">Eliminated per conversation</div></div>
+  </div>
+
+  <h2>The Problem</h2>
+  <p>The support team was operating with essentially no automation. Every conversation arrived in the same undifferentiated queue, and agents had to manually piece together context before they could even begin helping.</p>
+
+  <p><strong>Zero automatic enrichment.</strong> Agents saw the customer's message and nothing else. Every conversation started with 2&ndash;5 minutes of manual context-gathering &mdash; looking up account details, checking subscription status, reviewing history.</p>
+
+  <p><strong>No systematic triage.</strong> Every conversation landed in the same queue. Product feedback sat next to urgent bugs. Testimonials mixed with billing questions. Nothing was pre-sorted.</p>
+
+  <p><strong>Repetitive reply drafting.</strong> Agents wrote the same patterns over and over &mdash; similar greetings, similar troubleshooting steps, similar closings. Skilled writing time wasted on routine structure.</p>
+
+  <p><strong>Unstructured engineering escalations.</strong> When a support agent needed engineering help, they manually created a ticket. No standardized format. No cross-linking between the support conversation and the engineering ticket. Context was lost in translation.</p>
+
+  <p><strong>Customer praise disappeared.</strong> When a customer said something wonderful, the agent read it, maybe shared it in Slack &mdash; and it was forgotten. No systematic capture. No way to use testimonials for marketing or morale.</p>
+
+  <h2>The Solution: Four Interlocking AI Systems</h2>
+
+  <h3>System 1: AI Support System</h3>
+  <h4>Automatic Enrichment + Two-Layer AI Triage</h4>
+
+  <p>Every inbound conversation passes through a six-step pipeline that transforms a raw message into a fully enriched, classified, and routed record &mdash; before any agent sees it.</p>
+
+  <p><strong>Step 1 &mdash; Message Normalization + Enrichment:</strong> HTML stripped to plain text. Session ID extracted. Customer profile loaded with account details, subscription status, and history.</p>
+
+  <p><strong>Step 2 &mdash; Rule-Based Tagging (Before AI):</strong> Fast, deterministic checks run first. Support inquiry detection, feedback identification, enterprise account flagging, specialized support routing. Rules are cheap and instant &mdash; they handle the obvious cases before burning an AI call.</p>
+
+  <p><strong>Step 3 &mdash; Gating Classifier (Fast AI):</strong> A single LLM call returns exactly one token: <strong>worse</strong>, <strong>nomad</strong>, <strong>testimonial</strong>, or <strong>not relevant</strong>. This is the gate. It costs almost nothing and runs in milliseconds.</p>
+
+  <div class="cs-callout">
+    <p><strong>Two-layer classification saves cost while ensuring nothing is missed.</strong> The fast gate handles 100% of messages for pennies. Only messages that need detailed analysis proceed to the second, more expensive pass.</p>
+  </div>
+
+  <p><strong>Step 4 &mdash; Feedback Tracker Classifier (Detailed AI):</strong> For messages that pass the gate, a second LLM call loads the full category registry from Notion and returns structured JSON: category, sentiment, and Slack thread destination.</p>
+
+  <p><strong>Step 5 &mdash; Routing Matrix:</strong> Each classification maps to a specific destination:</p>
+  <ul>
+    <li><strong>Worse</strong> &rarr; Product feedback thread (regression signal)</li>
+    <li><strong>Nomad</strong> &rarr; Dashboard for trend tracking</li>
+    <li><strong>Testimonial</strong> &rarr; Social proof capture pipeline</li>
+    <li><strong>Not relevant</strong> &rarr; Logged only, no routing</li>
+  </ul>
+
+  <p><strong>Step 6 &mdash; Dashboard Logging:</strong> Every conversation gets a full structured record in Notion &mdash; regardless of classification. Nothing is discarded. Everything is queryable.</p>
+
+  <div class="cs-callout">
+    <p><strong>Special case: medication misspellings.</strong> When a customer misspells a medication name, the system routes to a dedicated safety alert channel. In healthcare software, medication errors are a patient safety issue &mdash; not a routine support ticket.</p>
+  </div>
+
+  <h3>System 2: Prompt Agent</h3>
+  <h4>AI Ghost-Writer for Support Agents</h4>
+
+  <p>When an agent types <strong>@Bot</strong> in an Intercom internal note, the Prompt Agent activates. But it doesn't just generate text &mdash; it decides what kind of response is needed.</p>
+
+  <p><strong>Decision logic:</strong> If the agent says "tell the customer..." the AI drafts a reply posted as that agent. If the agent says "look up..." or "summarize..." the AI sends a private note back to the agent only.</p>
+
+  <p><strong>Context loading:</strong> The system loads the full conversation history, the internal rules database, and the agent's real name. The AI knows the product, the policies, and who it's writing as.</p>
+
+  <p><strong>Tool access:</strong> The AI agent has real tools at its disposal &mdash; Help Center Search, Help Center Scraper, Reply to Customer, and Send Note to Agent. It doesn't just generate text; it can look up real documentation and take real actions.</p>
+
+  <div class="cs-callout">
+    <p><strong>Guardrails are non-negotiable:</strong> Never hallucinate information. Never reveal it's AI. Never call clinicians "users." HTML formatting only. Contextual signatures that match the agent's style.</p>
+  </div>
+
+  <p><strong>What the customer sees:</strong> A well-crafted, on-brand reply signed with their agent's name. Indistinguishable from a manually written response. The AI amplifies the agent &mdash; it doesn't replace them.</p>
+
+  <div class="cs-callout">
+    <p><strong>The AI ghost-writer pattern is transformative.</strong> It amplifies agents rather than replacing them. Adoption is dramatically higher than any "AI replaces the human" approach because agents stay in control of the relationship.</p>
+  </div>
+
+  <h3>System 3: Smart Ticketing System</h3>
+  <h4>AI-Structured Engineering Escalations</h4>
+
+  <p>When an agent tags a conversation with <strong>techsupport</strong>, the Smart Ticketing System takes over. What used to take 10&ndash;15 minutes of manual ticket creation now happens in under 30 seconds.</p>
+
+  <p><strong>Three LLM passes, each with a specific job:</strong></p>
+  <ol>
+    <li><strong>Categorize</strong> &mdash; What type of engineering issue is this?</li>
+    <li><strong>Structure</strong> &mdash; Extract the relevant technical details into a standardized format</li>
+    <li><strong>Parse support notes</strong> &mdash; Pull agent observations and reproduction steps from internal notes</li>
+  </ol>
+
+  <p><strong>Automated outputs:</strong></p>
+  <ul>
+    <li>Creates a Notion ticket with full structured data (category, severity, reproduction steps, customer impact)</li>
+    <li>Posts a rich Slack announcement with direct links</li>
+    <li>Writes back: Slack thread linked to Notion ticket, Intercom admin note confirms creation</li>
+    <li>Round-robin assignment with route rules ensures fair workload distribution</li>
+  </ul>
+
+  <div class="cs-callout">
+    <p><strong>The result: three-way cross-platform linking in under 30 seconds.</strong> Intercom conversation &rarr; Notion ticket &rarr; Slack thread. Every stakeholder can trace from any system to any other. Complete audit trail, zero manual linking.</p>
+  </div>
+
+  <h3>System 4: Social Proof Capture</h3>
+  <h4>Automatic Testimonial Extraction &amp; Routing</h4>
+
+  <p>Customer praise is one of the most valuable signals a company receives &mdash; and one of the most commonly lost. This system ensures every testimonial is captured, structured, and surfaced.</p>
+
+  <p><strong>Two triggers:</strong></p>
+  <ul>
+    <li><strong>Automatic</strong> &mdash; The AI triage system (System 1) detects a testimonial classification</li>
+    <li><strong>Manual</strong> &mdash; An agent adds a specific tag when they spot praise the AI missed</li>
+  </ul>
+
+  <p><strong>Processing pipeline:</strong> Fetches the full conversation, looks up the customer's medical specialty, and selects the right text source (AI-detected quote vs. agent-tagged message).</p>
+
+  <p><strong>Output:</strong> Posts to the #social-proof channel as "LoveBot" with the verbatim quote, customer email, specialty, and a direct link to the conversation. Marketing, leadership, and the whole team see it instantly.</p>
+
+  <h2>How the Systems Connect</h2>
+
+  <table class="cs-schema-table">
+    <thead><tr><th>System</th><th>Feeds Into</th><th>Triggered By</th></tr></thead>
+    <tbody>
+      <tr><td>AI Support System</td><td>Prompt Agent, Smart Ticketing, Social Proof</td><td>Every inbound conversation</td></tr>
+      <tr><td>Prompt Agent</td><td>Customer replies, agent notes</td><td>@Bot mention in Intercom</td></tr>
+      <tr><td>Smart Ticketing</td><td>Notion, Slack, Intercom write-back</td><td>techsupport tag</td></tr>
+      <tr><td>Social Proof Capture</td><td>#social-proof Slack channel</td><td>AI detection or agent tag</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Outcomes</h2>
+
+  <h3>For Support Agents</h3>
+  <p>Every conversation arrives pre-enriched with customer context. The AI ghost-writer eliminates repetitive drafting. Engineering escalations that took 10&ndash;15 minutes now take under 30 seconds. Agents spend their time on judgment and empathy &mdash; not data entry.</p>
+
+  <h3>For the Product Team</h3>
+  <p>Every conversation is classified and logged. Regression signals ("worse" classifications) surface automatically. Medication safety alerts route to a dedicated channel. Product decisions are backed by structured, queryable support data instead of anecdotes.</p>
+
+  <h3>For Engineering</h3>
+  <p>Escalation tickets arrive with AI-extracted context &mdash; category, severity, reproduction steps, customer impact. Three-way cross-linking (Intercom &rarr; Notion &rarr; Slack) means no context is lost. Fair round-robin assignment distributes workload evenly.</p>
+
+  <h3>For the Company</h3>
+  <p>Customer praise is automatically captured and surfaced. All support data is structured and queryable. Four Make scenarios run with zero manual intervention. The customer experience is unchanged &mdash; but the operational efficiency behind it is dramatically better.</p>
+
+  <h2>Key Design Insights</h2>
+  <ol>
+    <li><strong>Two-layer classification: fast gate + detailed pass.</strong> The gating classifier handles 100% of volume for near-zero cost. Only messages needing deep analysis hit the expensive model. This saves AI cost while ensuring nothing is missed.</li>
+    <li><strong>The AI ghost-writer pattern is transformative.</strong> It amplifies agents rather than replacing them. Agents keep the relationship. The AI handles the writing. Adoption is dramatically higher than replacement approaches.</li>
+    <li><strong>Cross-platform linking creates a complete audit trail.</strong> Intercom &rarr; Notion &rarr; Slack. Any stakeholder can trace from any entry point to the full picture. No orphaned tickets, no lost context.</li>
+    <li><strong>A shared category registry enables system-wide consistency.</strong> The Notion-based registry is the single source of truth. Every system reads from it. When categories change, all systems update automatically.</li>
+    <li><strong>Graceful degradation over brittle perfection.</strong> If the AI classifier fails, the conversation still arrives in the queue &mdash; just unclassified. If the ticketing system errors, the agent can still create a ticket manually. Nothing breaks hard.</li>
+  </ol>
+
+  <hr class="cs-divider">
+
+  <h2>Builder's Note</h2>
+  <p>Support agents don't want AI that replaces them. They want AI that removes the tedious parts &mdash; enrichment, triage, escalation formatting &mdash; and accelerates the skilled parts: drafting good replies, making judgment calls.</p>
+  <p>The Prompt Agent drafts a reply and posts it as the agent &mdash; maintaining the human relationship while eliminating writing time. This "AI-behind-the-human" pattern has higher adoption than any "AI-replaces-the-human" approach I've seen.</p>
+  <p>The four systems handle enrichment, triage, response drafting, escalation, and praise capture &mdash; the five biggest time sinks in a support operation. But they do it invisibly. The customer experience is unchanged. The agent experience is dramatically better.</p>
+
+  <div class="cs-footer">
+    <span>&copy; 2026 Edozie Ezeanolue</span>
+    <a href="/">edozie.dev</a>
+  </div>
+</article>
+
+</div><!-- end cs-content -->
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch(e) {}
+}
+function checkPw() {
+  const input = document.getElementById('pwInput');
+  if (input.value === 'ezeanolue.dev123$') {
+    document.getElementById('pwGate').classList.add('hidden');
+    document.getElementById('csContent').classList.add('unlocked');
+    try { sessionStorage.setItem('cs_auth', '1'); } catch(e) {}
+  } else {
+    input.classList.add('error');
+    setTimeout(() => input.classList.remove('error'), 600);
+  }
+}
+// Auto-unlock if already authenticated this session
+(function() {
+  try { if (sessionStorage.getItem('cs_auth') === '1') { document.getElementById('pwGate').classList.add('hidden'); document.getElementById('csContent').classList.add('unlocked'); } } catch(e) {}
+})();
+document.getElementById('pwInput').addEventListener('keydown', function(e) { if (e.key === 'Enter') checkPw(); });
+</script>
+</body>
+</html>
