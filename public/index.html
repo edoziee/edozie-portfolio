@@ -1267,6 +1267,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 // ── INTAKE FORM ──
 const INTAKE = {
   url: 'https://zczisljqxykiigujheac.supabase.co/functions/v1/submit-lead',
+  notifyUrl: 'https://zczisljqxykiigujheac.supabase.co/functions/v1/notify-lead',
   key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjemlzbGpxeHlraWlndWpoZWFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1MTM2ODYsImV4cCI6MjA5MTA4OTY4Nn0.YLUWcfGusN3JMcNL8_VKegDM4lvvpngjg5KBJj0AU5E',
   total: 11
 };
@@ -1479,6 +1480,16 @@ async function submitIntake() {
     if (!res.ok) throw new Error('submit failed');
     document.getElementById('intake-thank-name').textContent = intakeData.name.split(' ')[0];
     showIntakeStep('success');
+    // Fire-and-forget email notification (don't block the success screen)
+    fetch(INTAKE.notifyUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + INTAKE.key,
+        'apikey': INTAKE.key
+      },
+      body: JSON.stringify(intakeData)
+    }).catch(() => {});
   } catch (e) {
     errEl.classList.add('visible');
     nextBtn.innerHTML = 'Submit →';
