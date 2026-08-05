@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "saas-site",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["-y", "serve", "public", "-l", "3000", "--no-clipboard"],
+      "port": 3000
+    },
+    {
+      "name": "service-site",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["-y", "serve", "../edozie-portfolio-service/public", "-l", "3001", "--no-clipboard"],
+      "port": 3001
+    }
+  ]
+}
