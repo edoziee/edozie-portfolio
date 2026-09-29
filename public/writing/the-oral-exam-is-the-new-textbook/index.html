@@ -122,11 +122,11 @@
 
   <p>That's the entire mechanism of an oral exam, and oral exams exist because they work. In my world, anesthesiology, the specialty's highest-stakes test is literally two examiners grilling you live. The ABA APPLIED exam is 20 minutes of a stranger probing your clinical reasoning out loud — "what are you giving, what dose, why, what if the blood pressure tanks anyway." You can't pass that by having read the chapter. You pass it by having <em>said</em> the reasoning, repeatedly, under pressure. Spoken recall is not a cute feature of medical training. It's the format the profession chose.</p>
 
-  <p>Real-time models — OpenAI's Realtime API, the GPT audio models, the whole live speech-to-speech stack — just made this medium cheap, fast, and available to anyone with a browser. Median response latency on my build is under a second. A year ago this was science fair territory. Now it's an API call. And the education world is still mostly using voice to read flashcards out loud.</p>
+  <p>Real-time models — OpenAI's Realtime API, Google's Gemini Live, ElevenLabs' new v4 Turbo built for live agents, Hume's empathic voice interface, and a fast-moving crowd behind them — just made this medium cheap, fast, and available to anyone with a browser. Median response latency on my build is under a second. A year ago this was science fair territory. Now it's an API call. And the education world is still mostly using voice to read flashcards out loud.</p>
 
   <h2>What building one taught me</h2>
 
-  <p>I'm building <a href="https://casecoach.app" style="color:var(--text);">CaseCoach</a>, an AI voice examiner for anesthesia oral boards. Live spoken examiner, full exam structure, independent AI graders scoring the transcript afterward. Here's what I've learned so far:</p>
+  <p>I'm building <a href="https://beta.casecoach.app" style="color:var(--text);">CaseCoach</a>, an AI voice examiner for anesthesia oral boards. Live spoken examiner, full exam structure, independent AI graders scoring the transcript afterward. Here's what I've learned so far:</p>
 
   <p><strong>1. The voice is the easy part.</strong> Getting a model to sound like an examiner is a solved problem. The hard part is the pedagogy layer: what gets asked, in what order, when to probe, when to move on, when to throw a complication at the candidate mid-answer. I split the architecture accordingly: the voice model owns wording and judgment <em>within</em> a question; a separate conductor — a state machine — owns the exam's structure. Real-time models made the medium possible. But the innovation lives in the layer above the model, and almost nobody in medical education is working there.</p>
 
