@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Oral Exam Is the New Textbook — Edozie Ezeanolue</title>
+<meta name="description" content="Real-time voice AI created a new educational medium — live, back-and-forth, spoken learning. Almost nobody is treating it as one. What building CaseCoach, an AI voice examiner for anesthesia oral boards, taught me.">
+<meta property="og:title" content="The Oral Exam Is the New Textbook">
+<meta property="og:description" content="Real-time voice AI created a new educational medium — live, back-and-forth, spoken learning. What building an AI voice examiner for anesthesia oral boards taught me.">
+<meta property="og:type" content="article">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1017;
+    --surface: #141821;
+    --surface-2: #1a1f2a;
+    --border: #1e2433;
+    --border-light: #282f3e;
+    --text: #e8e4df;
+    --text-muted: #8a8580;
+    --text-dim: #5a5550;
+    --accent: #c9ff57;
+    --accent-dim: #c9ff5720;
+    --accent-mid: #c9ff5740;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  [data-theme="light"] {
+    --bg: #f4f1ec;
+    --surface: #e9e6e0;
+    --surface-2: #dfdcd6;
+    --border: #d0cdc6;
+    --border-light: #c4c0ba;
+    --text: #1a1816;
+    --text-muted: #5c5750;
+    --text-dim: #8a857e;
+    --accent: #3d6b00;
+    --accent-dim: #3d6b0018;
+    --accent-mid: #3d6b0035;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.7; }
+  .w-page { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+  .w-back {
+    font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim);
+    text-decoration: none; letter-spacing: 0.06em; display: inline-flex; align-items: center; gap: 0.4rem;
+    margin-bottom: 3rem; transition: color 0.2s;
+  }
+  .w-back:hover { color: var(--accent); }
+  .w-label {
+    font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem;
+  }
+  .w-page h1 {
+    font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 400; line-height: 1.15; margin-bottom: 1rem; color: var(--text);
+  }
+  .w-meta {
+    font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim);
+    letter-spacing: 0.04em; margin-bottom: 2.5rem;
+  }
+  .w-page h2 {
+    font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 1.7rem);
+    font-weight: 400; line-height: 1.2; margin-top: 3.5rem; margin-bottom: 1.25rem; color: var(--text);
+  }
+  .w-page p { margin-bottom: 1.25rem; color: var(--text-muted); font-size: 1rem; }
+  .w-page strong { color: var(--text); font-weight: 500; }
+  .w-page em { color: var(--text); }
+  .w-signoff { margin-top: 2.5rem; font-family: var(--serif); font-size: 1.1rem; color: var(--text); }
+  .w-footer {
+    margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .w-footer span { font-family: var(--mono); font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.04em; }
+  .w-footer a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; font-family: var(--mono); font-size: 0.7rem; }
+  .w-footer a:hover { color: var(--accent); }
+  .theme-toggle {
+    position: fixed; top: 1.5rem; right: 1.5rem; background: none;
+    border: 1px solid var(--border); cursor: pointer; width: 32px; height: 32px;
+    border-radius: 2px; display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; color: var(--text-muted); transition: border-color 0.3s, color 0.3s; z-index: 100;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .theme-toggle .icon-sun { display: none; }
+  .theme-toggle .icon-moon { display: block; }
+  [data-theme="light"] .theme-toggle .icon-sun { display: block; }
+  [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+  @media (max-width: 768px) {
+    .w-page { padding: 2rem 1.5rem 4rem; }
+    .w-footer { flex-direction: column; gap: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+  <span class="icon-moon">&#9789;</span>
+  <span class="icon-sun">&#9788;</span>
+</button>
+
+<article class="w-page">
+  <a href="/writing/" class="w-back">&#8592; Writing</a>
+  <div class="w-label">Essay</div>
+  <h1>The Oral Exam Is the New Textbook</h1>
+  <div class="w-meta">Edozie Ezeanolue &middot; September 29, 2026 &middot; 5 min read</div>
+
+  <p>The internet has had three great educational media: text, video, and text again — but interactive. Chatbots are just books you can interrogate. Real-time voice AI is the fourth medium, and almost nobody is treating it as one. Voice products are everywhere; structured spoken <em>learning</em> is not — and in medicine, where the exam itself is oral, I haven't seen anyone doing it at real rigor.</p>
+
+  <p>Look at every voice demo out there. They're all butlers: book a table, check the weather, read my email back to me. Useful, but none of them teach.</p>
+
+  <p>The under-innovated use case is sitting right in front of us: live, back-and-forth, spoken learning. A teacher that asks you a question, listens to your answer, probes the weak spots, changes the scenario mid-answer — in real time, out loud. Not a voice that reads you a summary. A voice that won't let you fake it.</p>
+
+  <h2>Why spoken is different</h2>
+
+  <p>Speaking is retrieval. When you type, you can hedge. You can edit. You can borrow the shape of an answer you don't fully own and it still reads fine on screen. When you have to answer out loud, within a few seconds, you commit. There is no backspace in a conversation.</p>
+
+  <p>That's the entire mechanism of an oral exam, and oral exams exist because they work. In my world, anesthesiology, the specialty's highest-stakes test is literally two examiners grilling you live. The ABA APPLIED exam is 20 minutes of a stranger probing your clinical reasoning out loud — "what are you giving, what dose, why, what if the blood pressure tanks anyway." You can't pass that by having read the chapter. You pass it by having <em>said</em> the reasoning, repeatedly, under pressure. Spoken recall is not a cute feature of medical training. It's the format the profession chose.</p>
+
+  <p>Real-time models — OpenAI's Realtime API, the GPT audio models, the whole live speech-to-speech stack — just made this medium cheap, fast, and available to anyone with a browser. Median response latency on my build is under a second. A year ago this was science fair territory. Now it's an API call. And the education world is still mostly using voice to read flashcards out loud.</p>
+
+  <h2>What building one taught me</h2>
+
+  <p>I'm building <a href="https://casecoach.app" style="color:var(--text);">CaseCoach</a>, an AI voice examiner for anesthesia oral boards. Live spoken examiner, full exam structure, independent AI graders scoring the transcript afterward. Here's what I've learned so far:</p>
+
+  <p><strong>1. The voice is the easy part.</strong> Getting a model to sound like an examiner is a solved problem. The hard part is the pedagogy layer: what gets asked, in what order, when to probe, when to move on, when to throw a complication at the candidate mid-answer. I split the architecture accordingly: the voice model owns wording and judgment <em>within</em> a question; a separate conductor — a state machine — owns the exam's structure. Real-time models made the medium possible. But the innovation lives in the layer above the model, and almost nobody in medical education is working there.</p>
+
+  <p><strong>2. Speaking forces commitment, and that's the learning.</strong> Watch someone take a voice exam versus typing into a chat tutor. The typed version produces careful, hedged, committee-written paragraphs. The spoken version produces a decision: "I'm giving 1.5 mg/kg of lidocaine." Wrong or right, it's <em>theirs</em>, and now the examiner can work with it. Feynman had it right — you don't understand something until you can say it out loud. A live voice examiner is Feynman technique with a sparring partner.</p>
+
+  <p><strong>3. Fluency needs a verification layer.</strong> This is the one people underestimate. Voice models are fluent and confident, including when they're wrong. If you're building an educational medium — training people who will make real decisions — you cannot grade on vibes. We run two independent AI graders against a fixed rubric, check every spoken dose in code against sourced ranges, and withhold credit on disagreement for a human to review. A recurring defect I've found: if the case file is missing the patient's weight, the model happily lets a 10x dose error slide as "unclear." The medium's promise is only as good as its verification. Entertain with voice; <em>train</em> with voice plus receipts.</p>
+
+  <p><strong>4. Latency is pedagogy.</strong> If the examiner takes three seconds to respond, the whole thing feels like a form with extra steps. Under a second, it feels like a person — and the pressure is real. The realism isn't decoration; it's what makes the retrieval practice work.</p>
+
+  <h2>Where this goes</h2>
+
+  <p>Medicine is where I'm starting, because it's where the stakes, the exam format, and the training gap line up perfectly. But the shape generalizes: law, pilots, language, interviews, anything where the test of knowledge is <em>saying it under pressure</em>.</p>
+
+  <p>The textbooks are written. The videos are recorded. The next format of learning is a live voice on the other end of the line that asks you the question you were hoping it wouldn't ask.</p>
+
+  <p>I'm building it. If you're thinking about this space, I'd like to hear what you're seeing.</p>
+
+  <p class="w-signoff">— Edozie</p>
+
+  <div class="w-footer">
+    <span>&copy; 2026 Edozie Ezeanolue</span>
+    <a href="/writing/">More writing</a>
+  </div>
+</article>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch(e) {}
+}
+</script>
+</body>
+</html>
