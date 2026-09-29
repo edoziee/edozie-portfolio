@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing — Edozie Ezeanolue</title>
+<meta name="description" content="Essays and notes from Edozie Ezeanolue — on AI, medicine, and building things.">
+<meta property="og:title" content="Writing — Edozie Ezeanolue">
+<meta property="og:description" content="Essays and notes on AI, medicine, and building things.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1017;
+    --surface: #141821;
+    --surface-2: #1a1f2a;
+    --border: #1e2433;
+    --border-light: #282f3e;
+    --text: #e8e4df;
+    --text-muted: #8a8580;
+    --text-dim: #5a5550;
+    --accent: #c9ff57;
+    --accent-dim: #c9ff5720;
+    --accent-mid: #c9ff5740;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  [data-theme="light"] {
+    --bg: #f4f1ec;
+    --surface: #e9e6e0;
+    --surface-2: #dfdcd6;
+    --border: #d0cdc6;
+    --border-light: #c4c0ba;
+    --text: #1a1816;
+    --text-muted: #5c5750;
+    --text-dim: #8a857e;
+    --accent: #3d6b00;
+    --accent-dim: #3d6b0018;
+    --accent-mid: #3d6b0035;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.7; }
+  .w-page { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+  .w-back {
+    font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim);
+    text-decoration: none; letter-spacing: 0.06em; display: inline-flex; align-items: center; gap: 0.4rem;
+    margin-bottom: 3rem; transition: color 0.2s;
+  }
+  .w-back:hover { color: var(--accent); }
+  .w-label {
+    font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem;
+  }
+  .w-page h1 {
+    font-family: var(--serif); font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400; line-height: 1.15; margin-bottom: 1rem; color: var(--text);
+  }
+  .w-intro { color: var(--text-muted); margin-bottom: 3rem; font-size: 1rem; }
+  .w-list { list-style: none; border-top: 1px solid var(--border); }
+  .w-list li { border-bottom: 1px solid var(--border); }
+  .w-list a {
+    display: block; padding: 1.75rem 0.5rem; text-decoration: none;
+    transition: background 0.2s, padding 0.2s;
+  }
+  .w-list a:hover { background: var(--surface); }
+  .w-list .w-item-label {
+    font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;
+  }
+  .w-list .w-item-title {
+    font-family: var(--serif); font-size: 1.4rem; font-weight: 400;
+    color: var(--text); line-height: 1.3; margin-bottom: 0.5rem;
+  }
+  .w-list .w-item-dek { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0.5rem; }
+  .w-list .w-item-date { font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.04em; }
+  .w-footer {
+    margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .w-footer span { font-family: var(--mono); font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.04em; }
+  .w-footer a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; font-family: var(--mono); font-size: 0.7rem; }
+  .w-footer a:hover { color: var(--accent); }
+  .theme-toggle {
+    position: fixed; top: 1.5rem; right: 1.5rem; background: none;
+    border: 1px solid var(--border); cursor: pointer; width: 32px; height: 32px;
+    border-radius: 2px; display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; color: var(--text-muted); transition: border-color 0.3s, color 0.3s; z-index: 100;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .theme-toggle .icon-sun { display: none; }
+  .theme-toggle .icon-moon { display: block; }
+  [data-theme="light"] .theme-toggle .icon-sun { display: block; }
+  [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+  @media (max-width: 768px) {
+    .w-page { padding: 2rem 1.5rem 4rem; }
+    .w-footer { flex-direction: column; gap: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+  <span class="icon-moon">&#9789;</span>
+  <span class="icon-sun">&#9788;</span>
+</button>
+
+<main class="w-page">
+  <a href="/" class="w-back">&#8592; edozie.dev</a>
+  <div class="w-label">Board</div>
+  <h1>Writing</h1>
+  <p class="w-intro">Essays and notes on AI, medicine, and building things. New posts whenever something's worth saying.</p>
+
+  <ul class="w-list">
+    <li>
+      <a href="/writing/the-oral-exam-is-the-new-textbook/">
+        <div class="w-item-label">Essay</div>
+        <div class="w-item-title">The Oral Exam Is the New Textbook</div>
+        <div class="w-item-dek">Real-time voice AI created a new educational medium — live, back-and-forth, spoken learning. What building an AI voice examiner for anesthesia oral boards taught me.</div>
+        <div class="w-item-date">September 29, 2026 &middot; 5 min read</div>
+      </a>
+    </li>
+  </ul>
+
+  <div class="w-footer">
+    <span>&copy; 2026 Edozie Ezeanolue</span>
+    <a href="/">edozie.dev</a>
+  </div>
+</main>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch(e) {}
+}
+</script>
+</body>
+</html>

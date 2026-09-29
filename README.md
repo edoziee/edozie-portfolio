@@ -10,6 +10,7 @@ https://edozie.dev
 
 - `public/index.html` — Deployed landing page
 - `public/case/` — Case study detail pages (currently not linked from the homepage)
+- `public/writing/` — Writing section: index plus essay pages
 - `supabase/functions/` — Supabase Edge Functions (legacy lead-intake backend; no longer called by the site)
 - `edozie_landingv1.html` — Landing page source (v1, archived)
 
