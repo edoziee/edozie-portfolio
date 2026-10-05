@@ -233,6 +233,8 @@
   .capability-icon { font-size: 1.4rem; margin-bottom: 1rem; }
   .capability h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.75rem; }
   .capability p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; }
+  .more-link { color: var(--accent); cursor: pointer; }
+  .more-body { margin-top: 0.6rem; }
 
   /* ── CASE STUDIES ── */
   .case-studies { display: flex; flex-direction: column; gap: 1.5rem; }
@@ -1038,7 +1040,7 @@
     <div class="capability">
       <div class="capability-icon">&#9671;</div>
       <h3>Completion verification</h3>
-      <p>Agents report success; someone has to check. Independent verification of what an agent claims it did &mdash; the gap no platform has closed yet.</p>
+      <p>An agent saying &ldquo;done&rdquo; is the agent grading its own homework. The check has to come from somewhere else &mdash; re-reading the page with fresh eyes, re-querying the ledger through a different path, re-running the tests. Everyone hand-builds this; nobody sells it.</p>
     </div>
     <div class="capability">
       <div class="capability-icon">&#11043;</div>
@@ -1051,9 +1053,10 @@
       <p>A compliance-first AI agent doing real operational work inside a live medical practice &mdash; payment posting, denial worklists, eligibility checks &mdash; with the harness (approval gates, audit trail, verification) as the actual product. Ask me about it.</p>
     </div>
     <div class="capability">
-      <div class="capability-icon">&#9201;</div>
-      <h3>Currently exploring <span class="cs-tag" style="margin-left:0.5rem;">In progress</span></h3>
-      <p>Long-horizon reliability: every agent aces the 10-step demo, but reliability falls off a cliff on long tasks. In healthcare the tasks are long by nature, and a wrong step lands on someone&rsquo;s care &mdash; not a bad tweet. Our working answer: keep the model on short tasks, let code own the loop and the ledger. Where exactly to draw that line is still an open question.</p>
+      <div class="capability-icon">&#9673;</div>
+      <h3>Long-horizon reliability <span class="cs-tag" style="margin-left:0.5rem;">Currently exploring</span></h3>
+      <p>Every agent aces the 10-step demo; reliability falls off a cliff on long ones. In healthcare the tasks are long by nature, and a wrong step lands on someone&rsquo;s care &mdash; not a bad tweet. <a class="more-link" href="#" onclick="toggleMore(this);return false;">more</a></p>
+      <p class="more-body" hidden>The harness contains the problem &mdash; stall detection, step caps, per-change read-backs &mdash; but containment isn&rsquo;t a cure. The deeper question is architectural: what should the model own, and what should live in code? Our working answers: short model-owned tasks, a code-owned loop and ledger, and intra-task memory infrastructure so the agent doesn&rsquo;t lose the thread mid-task. Where exactly to draw each line is still an open question.</p>
     </div>
   </div>
 </section>
@@ -1146,6 +1149,12 @@ function toggleNav() {
   document.getElementById('navLinks').classList.toggle('open');
   document.getElementById('navToggle').classList.toggle('active');
   document.body.classList.toggle('nav-open');
+}
+
+function toggleMore(link) {
+  const body = link.closest('.capability').querySelector('.more-body');
+  body.hidden = !body.hidden;
+  link.textContent = body.hidden ? 'more' : 'less';
 }
 document.querySelectorAll('.nav-links a').forEach(a => {
   a.addEventListener('click', () => {
